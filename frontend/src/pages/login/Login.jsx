@@ -43,7 +43,7 @@ const Login = () => {
 			console.log(inputs)
 			const res = await axios.post("http://localhost:4000/api/auth/login", inputs);
 			console.log(res.data)
-			if(res.data[0].email!==inputs.email || res.data[0].password!==inputs.password){
+			if(res.data[0]?.email!==inputs.email || res.data[0]?.password!==inputs.password){
 				setErrLogin(true)
 				return
 			} else {
