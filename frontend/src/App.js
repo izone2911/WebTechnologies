@@ -8,7 +8,8 @@ function App() {
     <Router>
       {/* <Navbar/> */}
       <Routes>
-        <Route path="/" element={<Navigate replace to="/dashboard" />} />
+        {/* <Route path="/" element={<Navigate replace to="/dashboard" />} /> */}
+        <Route path="/" element={<Navigate replace to="/login"/>} />
         <Route path="/login"  exact element={<Login />}  />
         <Route path="/register" exact element={<Register />} />
       </Routes>
