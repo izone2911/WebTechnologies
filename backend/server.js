@@ -16,11 +16,13 @@ try {
   console.error("Error:", err.message);
 }
 
-import BlogRoutes from "./routes/Blog.js"
-app.use("/api/blog",BlogRoutes)
+
 //////////////////////////////////////////////////////////////////////
 import AccountRoutes from "./routes/Account.js"
 app.use("/api/auth",AccountRoutes)
+//////////////////////////////////////////////////////////////////////
+import ExamRoutes from "./routes/Exam.js"
+app.use("/api/exam",ExamRoutes)
 
 app.get('*', (req, res) => res.send('404 NOT FOUND!!!'))
 
