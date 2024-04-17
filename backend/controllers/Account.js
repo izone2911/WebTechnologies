@@ -31,4 +31,4 @@ export const logOut = (req, res) => {
       })
       .status(200)
       .json("User has been logged out.");
-  };
+};

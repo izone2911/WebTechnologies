@@ -22,8 +22,14 @@ app.use("/api/blog",BlogRoutes)
 import AccountRoutes from "./routes/Account.js"
 app.use("/api/auth",AccountRoutes)
 
-app.get('*', (req, res) => res.send('404 NOT FOUND!!!'))
+///////////////////////////////////////////////////////////////////
+import MyCourseRoutes from "./routes/MyCourse.js";
+app.use("/api/mycourse", MyCourseRoutes);
+
+app.get('*', (req, res) => res.send('404 NOT FOUND!!!'));
 
 app.listen(4000,() => {
     console.log("Server is running on port 4000!!!")
 })
+
+

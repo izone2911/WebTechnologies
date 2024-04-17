@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate }
 //---------------------------------------------------------
 // import Navbar from './component/navbar/Navbar'
 
-import { Login, Register, } from "./pages";
+import { Login, Register, MyCourse} from "./pages";
 function App() {
   return (
     <Router>
@@ -12,6 +12,7 @@ function App() {
         <Route path="/" element={<Navigate replace to="/dashboard" />} />
         <Route path="/login"  exact element={<Login />}  />
         <Route path="/register" exact element={<Register />} />
+        <Route path="/mycourse" exact element={<MyCourse />} />
       </Routes>
     </Router>
     
