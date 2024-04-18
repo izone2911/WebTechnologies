@@ -1,6 +1,5 @@
 import { CourseModel } from "../models/Course.js";
 import { CourseAccountModel } from "../models/Course.js";
-import { AccountModel } from "../models/Blog.js";
 
 export const getMyCourse = async (req,res)=>{
     const {email} = req.body;
@@ -71,14 +70,29 @@ export const addStudent = async (req,res) => {
 export const deleteCourse = async (req,res) => {
     try {
         const blog = req.body.course;
-        // Xóa các khóa học từ CourseModel
         await CourseModel.deleteMany({ maLop: blog.maLop });
 
-        // Xóa các khóa học từ CourseAccountModel
         await CourseAccountModel.deleteMany({ maLop: blog.maLop });
 
         res.json({
             message: "Delete course successful"
+        });
+    } catch(err) {
+        res.status(500).json({
+            error: err.message
+        })
+    }
+}
+
+export const updateCourse = async (req,res) => {
+    try {
+        // const blog = req.body.course;
+        // await CourseModel.update({ maLop: blog.maLop }, {$set: {nameCourse: blog.nameCourse}});
+
+        // await CourseAccountModel.updateMany({ maLop: blog.maLop }, {$set: {nameCourse: blog.nameCourse}});
+
+        res.json({
+            message: "Update course successful"
         });
     } catch(err) {
         res.status(500).json({

@@ -80,8 +80,15 @@ function MyCourse() {
     const [editCoursePopUp, setEditCoursePopUp] = useState(false);
     const toggleEditCourse = (course)=>{
         setCourseChoice(course);
+        console.log(courseChoice);
         setEditCoursePopUp(!editCoursePopUp);
     };
+    const handleEditCourse = async(course)=>{
+        // courseChoice = course;
+        const res = await axios.post("http://localhost:4000/api/mycourse/deletecourse", {course: courseChoice});
+        console.log(res);
+        toggleEditCourse({dumb: "dumb"});
+    }
 
     // delete course
     const handleDeleteCourse = async(index, course)=>{
