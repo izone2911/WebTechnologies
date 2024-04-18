@@ -71,7 +71,7 @@ function MyCourse() {
             console.log("Add student successfull");
             togglePopupAddStudent();
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 
