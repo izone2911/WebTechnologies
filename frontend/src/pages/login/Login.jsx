@@ -27,7 +27,7 @@ const Login = () => {
 	const handleChange = (e) => {
 		setInputs((prevInputs) => ({
 		...prevInputs,
-		[e.target.name]: e.target.value,
+		[e.target.name]: e.target.value
 		}));
 	}
 
