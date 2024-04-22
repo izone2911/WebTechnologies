@@ -1,3 +1,25 @@
 .login100-more {
     background-image: url("./dependencies/images/bg-01.jpg");
 }
+
+.dashboard{
+    display: flex;
+    justify-content: space-around;
+    padding: 16px;
+    box-shadow: 0 1px 3px -2px black;
+}
+.login button{
+    width: 120px;
+    height: 35px;
+    outline: none;
+    border: 1px solid #7a7a7a;
+    border-radius: 10px;
+    color: #515151;
+    font-size: 20px;
+    font-weight: 500;
+    background: #ffff;
+    cursor: pointer;
+}
+.login button:active{
+    background: #f3f3f3;
+}

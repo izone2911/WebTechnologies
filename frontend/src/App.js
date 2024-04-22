@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate }
 // import Navbar from './component/navbar/Navbar'
 
 import { Login, Register, } from "./pages";
+import DashBoard from "./pages/login/DashBoard";
+
 function App() {
   return (
     <Router>
@@ -12,6 +14,7 @@ function App() {
         {/* <Route path="/" element={<Navigate replace to="/dashboard" />} /> */}
         <Route path="/" element={<Navigate replace to="/login"/>} />
         <Route path="/login"  exact element={<Login />}  />
+        <Route path="/dashboard"  exact element={<DashBoard />}  />
         <Route path="/register" exact element={<Register />} />
       </Routes>
     </Router>

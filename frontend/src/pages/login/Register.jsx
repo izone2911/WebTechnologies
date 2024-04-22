@@ -15,6 +15,14 @@ import './styleDiv.css'
 
 const Register = () => {
 
+
+	// lấy giá trị role
+	const [selectedOption, setSelectedOption] = useState("default");
+
+    const handleOptionChange = (event) => {
+        setSelectedOption(event.target.value);
+    };
+
     const [inputs, setInputs] = useState({
 		email: "",
 		password: ""
@@ -35,6 +43,8 @@ const Register = () => {
         	setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value.trim() }));
 		if(e.target.name !== "password")
 			setReInputs((prev) => ({ ...prev, [e.target.name]: e.target.value.trim() }));
+		if(e.target.name !== "email")
+        	setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value.trim() }));
     };
     
     const handleSubmit = async (e) => {
@@ -48,6 +58,34 @@ const Register = () => {
 				console.log("Resgister success")
 				navigate("/login");
 			}
+			else {
+				// Xử lý sai mật khẩu nhập lại
+				console.log("pass nhập lại bị sai");
+			}
+
+			// biểu thức chính quy cho email
+			const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+			const check = emailRegex.test(inputs.email)
+			if (check) {
+				console.log("đúng");
+			}
+			else {
+				console.log("sai");
+			}
+
+			// Kiểm tra đã nhập tên chưa
+			const nameInput = document.getElementById('name');
+
+  			if (nameInput.value.trim() === '') {
+				console.log("chưa nhập tên");
+  			} else {
+  			  console.log("đã nhập tên");
+  			}
+
+			console.log(selectedOption);
+
+			
+
         } catch (err) {
 			console.error("Error to register",err)
         }
@@ -61,25 +99,44 @@ const Register = () => {
 					<span class="login100-form-title p-b-43">
 						Sign up
 					</span>
+
+					{/* Thêm data-validate */}
+					<div class="wrap-input100 validate-input">
+						<input class="input100" id="name" type="text" name="name" placeholder="Your name" onChange={handleChange}/>
+						<span class="focus-input100"></span>
+						<span class="label-input100"></span>
+					</div>
 					
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email" onChange={handleChange}/>
+						<input class="input100" id="email" type="text" name="email" placeholder="Email" onChange={handleChange}/>
 						<span class="focus-input100"></span>
 						<span class="label-input100"></span>
 					</div>
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="password" placeholder="Password" onChange={handleChange}/>
+						<input class="input100" id="password" type="password" name="password" placeholder="Password" onChange={handleChange}/>
 						<span class="focus-input100"></span>
 						<span class="label-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="repassword" placeholder="Confirm Password" onChange={handleChange}/>
+						<input class="input100" id="rePassword" type="password" name="repassword" placeholder="Confirm Password" onChange={handleChange}/>
 						<span class="focus-input100"></span>
 						<span class="label-input100"></span>
 					</div>
+
+					<div>
+						<div class="" data-validate = "Password is required">
+							<input onChange={handleOptionChange} value="Student"  class="" id="" type="radio" name="role" placeholder="Confirm Password"/>
+							
+						</div>
+						<div class="" data-validate = "Password is required">
+							<input onChange={handleOptionChange} value="Teacher" class="" id="" type="radio" name="role" placeholder="Confirm Password"/>
+							
+						</div>
+					</div>
+
 					{checkConfirmPassword===true ? 
 					<div class="flex-sb-m w-full p-t-3 p-b-32">
 						<div class="contact100-form-checkbox">
