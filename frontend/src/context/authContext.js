@@ -9,19 +9,16 @@ export const AuthContexProvider = ({ children }) => {
   );
 
   const login = async (inputs) => {
-    const newInputs = {
-      ...inputs,
-      user:inputs.email
-    }
-    setCurrentUser(newInputs);
-    console.log("login thanh cong",newInputs);
+
+    setCurrentUser(inputs);
+    console.log("login thanh cong",inputs);
 
     // Thiết lập thời gian tồn tại của phiên đăng nhập là 30 phút (1800000 milliseconds)
-    const sessionTimeout = 1800000;
+    // const sessionTimeout = 1800000;
 
-    // Lưu thời gian hết hạn của phiên đăng nhập vào localStorage
-    const expirationTime = Date.now() + sessionTimeout;
-    localStorage.setItem("expirationTime", expirationTime);
+    // // Lưu thời gian hết hạn của phiên đăng nhập vào localStorage
+    // const expirationTime = Date.now() + sessionTimeout;
+    // localStorage.setItem("expirationTime", expirationTime);
   };
 
   const logout = async () => {
@@ -35,12 +32,12 @@ export const AuthContexProvider = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(currentUser));
 
     // Lấy thời gian hết hạn của phiên đăng nhập từ localStorage
-    const expirationTime = localStorage.getItem("expirationTime");
+    // const expirationTime = localStorage.getItem("expirationTime");
 
-    // Kiểm tra xem phiên đăng nhập có hết hạn chưa
-    if (expirationTime && Date.now() > Number(expirationTime)) {
-      logout();
-    }
+    // // Kiểm tra xem phiên đăng nhập có hết hạn chưa
+    // if (expirationTime && Date.now() > Number(expirationTime)) {
+    //   logout();
+    // }
   }, [currentUser]);
 
   return (

@@ -47,8 +47,9 @@ const Login = () => {
 				setErrLogin(true)
 				return
 			} else {
-				login(inputs)
-				navigate("/courses")
+				login(res.data[0])
+				// Course
+				navigate("/dashboard")
 			}
 		} catch (err) {
 			console.error("Login failed",err)

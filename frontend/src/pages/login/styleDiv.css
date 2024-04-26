@@ -23,3 +23,18 @@
 .login button:active{
     background: #f3f3f3;
 }
+
+.body {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.tabbar{
+    display: flex;
+    gap: 40px;
+}
+
+.is-active-btn {
+    color: #3738b2;
+    border-bottom: 2px solid #3738b2;
+}

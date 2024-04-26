@@ -32,3 +32,22 @@ export const logOut = (req, res) => {
       .status(200)
       .json("User has been logged out.");
   };
+
+export const changeAccountDetail = async (req, res) => {
+    try {
+        await AccountModel.findOneAndUpdate(
+            {email: req.body.email}, 
+            {
+                password: req.body.password,
+                fullname: req.body.fullname,
+                role: req.body.role
+            }
+        );
+        res.status(200).json("User data has been updated");
+        res.send("User data has been updated");
+    } catch (err) {
+        res.json({
+            error: err.message
+        })
+    }
+}

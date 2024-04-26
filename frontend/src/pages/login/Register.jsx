@@ -101,7 +101,7 @@ const Register = () => {
 					</span>
 
 					{/* Thêm data-validate */}
-					<div class="wrap-input100 validate-input">
+					<div class="wrap-input100 validate-input" >
 						<input class="input100" id="name" type="text" name="name" placeholder="Your name" onChange={handleChange}/>
 						<span class="focus-input100"></span>
 						<span class="label-input100"></span>
@@ -120,19 +120,19 @@ const Register = () => {
 						<span class="label-input100"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+					<div class="wrap-input100 validate-input" data-validate = "cfPassword is required">
 						<input class="input100" id="rePassword" type="password" name="repassword" placeholder="Confirm Password" onChange={handleChange}/>
 						<span class="focus-input100"></span>
 						<span class="label-input100"></span>
 					</div>
 
 					<div>
-						<div class="" data-validate = "Password is required">
-							<input onChange={handleOptionChange} value="Student"  class="" id="" type="radio" name="role" placeholder="Confirm Password"/>
+						<div class="">
+							<input onChange={handleOptionChange} value="Student"  class="" id="" type="radio" name="role"/>
 							
 						</div>
-						<div class="" data-validate = "Password is required">
-							<input onChange={handleOptionChange} value="Teacher" class="" id="" type="radio" name="role" placeholder="Confirm Password"/>
+						<div class="">
+							<input onChange={handleOptionChange} value="Teacher" class="" id="" type="radio" name="role"/>
 							
 						</div>
 					</div>
