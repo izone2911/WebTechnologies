@@ -4,9 +4,15 @@ const Schema = _Schema
 const accountSchema = new Schema({
     email: String,
     password: String,
+    role: String,
+    name: String,
     createAt: {
         type: Date,
         default: Date.now,
+    },
+    deleteAt: {
+        type: String,
+        default: "in use"
     }
 })
 

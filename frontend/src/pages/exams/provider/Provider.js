@@ -9,21 +9,16 @@ import { useParams } from 'react-router-dom';
 function Provider({ children }) {
     // declare
     const navigate = useNavigate();
-    const { examId } = useParams()
+    const { examID } = useParams()
     const [state, dispatch] = useReducer(reducer, initState)
     const [, setIsRefresh] = useState(false)
 
     useEffect(() => {
         const fetchData = async () => {
             const storedExamData = localStorage.getItem('storedExamData');
-            // if (storedExamData) {
-            //     const parsedExamData = JSON.parse(storedExamData);
-            //     dispatch(setStoredExamData(parsedExamData))
-            //     return;
-            // }
             
             try {
-                const response = await axios.get('http://localhost:4000/api/exams/run/'+examId, {
+                const response = await axios.get('http://localhost:4000/api/exam/run/'+examID, {
                     headers: {'Content-Type': 'application/json'}
                 });
                 dispatch(setExamData(response.data));
@@ -35,7 +30,7 @@ function Provider({ children }) {
             setIsRefresh(prev => !prev)
         }
         fetchData();
-    }, [examId]);
+    }, [examID]);
 
     useEffect(() => {
         if (state)

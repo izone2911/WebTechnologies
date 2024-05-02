@@ -1,0 +1,58 @@
+.aside {
+    width: 250px; height: fit-content;
+    min-width: 250px;
+    margin: 0 10px;
+}
+.informations {
+    position: fixed;
+    left: 20px; top: 170px;
+    border: 2px solid lightgrey;
+    box-shadow: 0 0 5px lightgrey;
+    border-radius: 5px;
+    padding: 10px 0;
+    background-color: #fbfbfb;
+}
+
+.timer {
+    border-bottom: 1px solid darkred;
+    padding: 5px 20px;
+    margin: 0 0 10px 0;
+}
+
+.linkBoxs {
+    flex-wrap: wrap;
+    justify-content: start;
+    width: 220px; height: fit-content;
+    padding: 10px 15px 10px 15px ;
+}
+.linkBox {
+    opacity: 0.9;
+    width: 28px; height: 28px;
+    margin: 5px;
+    font-size: 13px;
+    border: 1px solid gray;
+    border-radius: 100%;
+}
+.linkBox > a {
+    margin: 0 0 1px 0.5px;
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+}
+.button {
+    opacity: 0.8;
+    border-radius: 100%;
+    width: 28px; height: 28px;
+    padding: 0 0 3px 1px;
+    margin: 5px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.peditable {
+    position: fixed;
+    left: 20px; top: 90px;
+    width: 221px;
+    font-weight: 650;
+    text-align: center;
+}

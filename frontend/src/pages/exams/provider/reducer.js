@@ -21,9 +21,6 @@ export const initState = {
 }
 
 const reducer = (state, action) => {
-    // console.log('Action: ', action)
-    // console.log('Prev state: ', state)
-
     let newState,
         idQuestion, idOption,
         type, isSelected, answers,
