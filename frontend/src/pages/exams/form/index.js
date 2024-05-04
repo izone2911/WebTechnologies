@@ -18,7 +18,7 @@ function Form ({ setIsRefreshParent }) {
     const lenQuestions = state.exam.questions.length
     const { currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
-    const { examId } = useParams();
+    const { examID } = useParams();
 
     // function
     const handleShift = (e) => {
@@ -30,7 +30,7 @@ function Form ({ setIsRefreshParent }) {
     function checkFully() {
         const answers = state.user.answers;
         const length = state.exam.questions.length;
-
+        console.log(examID)
         for(let i=0; i<length; i++) 
             if(!answers[i] || !answers[i].length)
                 return 'Answer is empty! Do you want to continue ?';
@@ -44,7 +44,7 @@ function Form ({ setIsRefreshParent }) {
         let results = window.confirm(checkFully());
         if(!results) return false;
 
-        axios.post('http://localhost:4000/api/scores', {answers: state.user.answers, UserId: currentUser.UserId, ExamID: parseInt(examId)}, 
+        axios.post('http://localhost:4000/api/score', {answers: state.user.answers, userID: currentUser.email, examID: examID}, 
         { headers: { 'Content-Type': 'application/json' }})
 
         dispatch(setExamFinished());
