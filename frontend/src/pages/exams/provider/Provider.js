@@ -1,10 +1,11 @@
-import { useEffect, useReducer, useState } from 'react'
+import { useEffect, useReducer, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import reducer, { initState } from './reducer'
-import { setExamData, setUserCurrentBox, setExamStarted, setStoredExamData } from './actions'
+import { setExamData, setUserCurrentBox, setExamStarted, setStoredExamData, setExamAnswer } from './actions'
 import Context from './Context'
 import { useParams } from 'react-router-dom';
+import { AuthContext } from "../../../context/authContext.js";
 
 function Provider({ children }) {
     // declare
@@ -12,16 +13,25 @@ function Provider({ children }) {
     const { examID } = useParams()
     const [state, dispatch] = useReducer(reducer, initState)
     const [, setIsRefresh] = useState(false)
+    const { currentUser } = useContext(AuthContext)
 
     useEffect(() => {
         const fetchData = async () => {
             const storedExamData = localStorage.getItem('storedExamData');
             
             try {
-                const response = await axios.get('http://localhost:4000/api/exam/run/'+examID, {
+                const response = await axios.post('http://localhost:4000/api/exam/run/'+examID, {
+                    "userID" : currentUser.email
+                } ,{
                     headers: {'Content-Type': 'application/json'}
                 });
                 dispatch(setExamData(response.data));
+                console.log("hehe",response.data,response.data.userAnswers)
+                response.data.userAnswers.forEach(element => {
+                    console.log("dulieu",element)
+                    if(element?.choose===false)
+                        dispatch(setExamAnswer(element))
+                });
             } catch (error) {
                 console.error(error);
             }
@@ -30,7 +40,27 @@ function Provider({ children }) {
             setIsRefresh(prev => !prev)
         }
         fetchData();
-    }, [examID]);
+    }, [examID,currentUser.email]);
+
+    useEffect(() => {
+        const updateUserAnswer = async () => {
+            try {
+                let dataUpdate = {}
+                dataUpdate.answers = state.user.answers
+                dataUpdate.userID = currentUser.email
+                console.log("dataUpdate_______",dataUpdate)
+                const response = await axios.post('http://localhost:4000/api/exam/update/'+examID, dataUpdate , {
+                    headers: {'Content-Type': 'application/json'}
+                })
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+        // updateUserAnswer()
+
+        console.log("Day ne ____" , state.user.answers)
+    }, [state])
 
     useEffect(() => {
         if (state)

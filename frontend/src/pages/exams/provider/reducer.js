@@ -65,7 +65,7 @@ const reducer = (state, action) => {
                     ...newState.exam,
                     ...action.payload
                 }
-            newState.exam.deadline = Date.now() + newState.exam.timeLimit * 1000;
+            newState.exam.deadline = newState.exam.timeLimit;
             break;
 
         case SET_EXAM_ANSWER:
