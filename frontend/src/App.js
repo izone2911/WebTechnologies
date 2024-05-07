@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate }
 //---------------------------------------------------------
 // import Navbar from './component/navbar/Navbar'
 
-import { Login, Register, MyCourse} from "./pages";
+import { Login, Register, MyCourse, Course} from "./pages";
 function App() {
   return (
     <Router>
@@ -14,6 +14,7 @@ function App() {
         <Route path="/login"  exact element={<Login />}  />
         <Route path="/register" exact element={<Register />} />
         <Route path="/mycourse" exact element={<MyCourse />} />
+        <Route path="/course" exact element={<Course />} />
       </Routes>
     </Router>
     
