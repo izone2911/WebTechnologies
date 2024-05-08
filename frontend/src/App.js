@@ -2,8 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate }
   from "react-router-dom";
 //---------------------------------------------------------
 // import Navbar from './component/navbar/Navbar'
-
-import { Login, Register, } from "./pages";
+import { Login, Register, Exam } from "./pages";
 function App() {
   return (
     <Router>
@@ -13,6 +12,7 @@ function App() {
         <Route path="/" element={<Navigate replace to="/login"/>} />
         <Route path="/login"  exact element={<Login />}  />
         <Route path="/register" exact element={<Register />} />
+        <Route path="/exam/:examID" exact element={<Exam />} />
       </Routes>
     </Router>
     

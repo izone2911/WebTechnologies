@@ -23,6 +23,9 @@ app.use("/api/auth",AccountRoutes)
 //////////////////////////////////////////////////////////////////////
 import ExamRoutes from "./routes/Exam.js"
 app.use("/api/exam",ExamRoutes)
+//////////////////////////////////////////////////////////////////////
+import ScoreExamRoutes from "./routes/ScoreExam.js"
+app.use("/api/score",ScoreExamRoutes)
 
 app.get('*', (req, res) => res.send('404 NOT FOUND!!!'))
 

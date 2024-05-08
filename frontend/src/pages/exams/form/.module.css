@@ -1,0 +1,37 @@
+.userForm {
+    padding: 10px 20px 50px 20px;
+    width: 100%; height: fit-content;
+    min-height: 100vh;
+    border: 2px solid lightgrey;
+    border-radius: 10px;
+    margin: 1px 3px;
+    background-color: white;
+}
+
+.footer {
+    position: fixed;
+    left: 0; bottom: 0;
+    justify-content: space-around !important;
+    width: 100%; height: fit-content;
+    padding: 5px 0;
+    background: linear-gradient(45deg, 
+                rgb(205, 205, 205) 0%,
+                rgb(215, 215, 215) 10%,
+                rgb(210, 210, 210) 20%,
+                rgb(225, 225, 225) 30%,
+                rgb(220, 225, 225) 40%,
+                rgb(235, 235, 235) 50%, 
+                rgb(230, 230, 230) 60%,
+                rgb(245, 245, 245) 70%,
+                rgb(240, 240, 240) 80%,
+                rgb(255, 255, 255) 90%, 
+                rgb(250, 250, 250) 100%);
+}
+.shift > * {
+    margin: 10px;
+}
+.footer button {
+    font-size: 17px;
+    padding: 3px 10px;
+    border-radius: 7px;
+}

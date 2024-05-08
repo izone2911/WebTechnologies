@@ -1,12 +1,14 @@
 import {Schema as _Schema, model} from "mongoose"
 const Schema = _Schema
 
-const examSchema = new Schema({
+const examAccountSchema = new Schema({
     examID: String,//maLop+kiHoc
+    userID: String,
     maHP: String,
     kiHoc: String,
     maLop: String,
     title: String,
+    userAnswers: Object,
     questions: Object,
     answers: Object,
     createAt: {
@@ -19,4 +21,4 @@ const examSchema = new Schema({
     }
 })
 
-export const ExamModel = model("exams",examSchema)
+export const ExamAccountModel = model("exam_accounts",examAccountSchema)
