@@ -4,7 +4,7 @@ import Timer from "../timer"
 import '../customlibrary/basic.css'
 import styles from './.module.css'
 
-function Aside ({ setIsRefreshParent }) {
+function Aside({ setIsRefreshParent }) {
     const [state, dispatch] = useExam()
     const questions = state.exam.questions
     const answers = state.user.answers
@@ -16,13 +16,10 @@ function Aside ({ setIsRefreshParent }) {
     }
     function LinkBoxs() {
         let linkBoxs = [], background
-        
+
         for (let i=0; i < questions.length; i++) {
             background = (answers[i] && answers[i].length) ?
-                'linear-gradient(0deg, lightgrey 48%,': 'linear-gradient(0deg, whitesmoke 48%,'
-
-            background += (state.user.currentBox<=i && i<state.user.currentBox+5) ?
-                'whitesmoke 49%, lightgrey 50%)' : 'whitesmoke 49%, whitesmoke 50%)'
+                'blue': 'white'
 
             linkBoxs.push(
                 <label key={i} className={"kimcenter "+styles.linkBox} style={{background}}>
@@ -44,9 +41,9 @@ function Aside ({ setIsRefreshParent }) {
             </div>
             <div className={"kimcenter kimcolumn " + styles.informations}>
                 <div className={styles.timer}>
-                    <Timer/>
+                    <Timer />
                 </div>
-                <div className={"kimcenter "+styles.linkBoxs}>
+                <div className={"kimcenter " + styles.linkBoxs}>
                     {LinkBoxs()}
                 </div>
             </div>

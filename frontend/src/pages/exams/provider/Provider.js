@@ -43,26 +43,6 @@ function Provider({ children }) {
     }, [examID,currentUser.email]);
 
     useEffect(() => {
-        const updateUserAnswer = async () => {
-            try {
-                let dataUpdate = {}
-                dataUpdate.answers = state.user.answers
-                dataUpdate.userID = currentUser.email
-                console.log("dataUpdate_______",dataUpdate)
-                const response = await axios.post('http://localhost:4000/api/exam/update/'+examID, dataUpdate , {
-                    headers: {'Content-Type': 'application/json'}
-                })
-            } catch (error) {
-                console.error(error)
-            }
-        }
-
-        // updateUserAnswer()
-
-        console.log("Day ne ____" , state.user.answers)
-    }, [state])
-
-    useEffect(() => {
         if (state)
           localStorage.setItem('storedExamData', JSON.stringify(state));
       }, [state]);

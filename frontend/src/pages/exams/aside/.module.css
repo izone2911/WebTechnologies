@@ -1,7 +1,8 @@
 .aside {
-    width: 250px; height: fit-content;
-    min-width: 250px;
+    width: 300px; height: fit-content;
+    min-width: 300px;
     margin: 0 10px;
+    /* 250 */
 }
 .informations {
     position: fixed;
@@ -14,7 +15,7 @@
 }
 
 .timer {
-    border-bottom: 1px solid darkred;
+    /* border-bottom: 1px solid darkred; */
     padding: 5px 20px;
     margin: 0 0 10px 0;
 }
@@ -22,19 +23,21 @@
 .linkBoxs {
     flex-wrap: wrap;
     justify-content: start;
-    width: 220px; height: fit-content;
+    width: 280px; height: fit-content;
     padding: 10px 15px 10px 15px ;
 }
 .linkBox {
     opacity: 0.9;
-    width: 28px; height: 28px;
+    width: 30px; height: 30px;
     margin: 5px;
     font-size: 13px;
     border: 1px solid gray;
-    border-radius: 100%;
+    border-radius: 0%;
+    /* 100 */
 }
 .linkBox > a {
-    margin: 0 0 1px 0.5px;
+    /* margin: 0 0 1px 0.5px; */
+    margin: 0;
     text-decoration: none;
     color: black;
     font-weight: 600;
@@ -52,7 +55,8 @@
 .peditable {
     position: fixed;
     left: 20px; top: 90px;
-    width: 221px;
+    /* width: 221px; */
+    width: 284px;
     font-weight: 650;
     text-align: center;
 }
