@@ -7,6 +7,7 @@ const examSchema = new Schema({
     kiHoc: String,
     maLop: String,
     numQuestion: String,
+    title: String,
     type: String,
     question: String,
     answer: Object,

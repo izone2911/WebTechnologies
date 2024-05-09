@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import React, { useContext, useState , useEffect} from "react";
 import axios from "axios"
 
@@ -19,20 +19,23 @@ function Course() {
 
     const acc = teacher_acc;
 
-    const course = {
-        name: "Machine Learning",
-        description: "This is course about basic machine learning"
-    }
+    const [course, setCourse] = useState({
+        nameCourse: "Failed",
+        description: "Failed too"
+    });
 
-    const exam = {
-        maHP: "IT3150",
-        kiHoc: "2023.2",
-        maLop: "123321",
-        numQuestion: 20,
-        type: "Giua ky",
-        createAt: "20/03/2023",
-        deleteAr: ""
-    }
+    const maLop = useParams();
+
+    useEffect(()=>{
+        axios.post("http://localhost:4000/api/mycourse/getcourse", {maLop: maLop})
+        .then(result =>{
+            setCourse(result.data[0]);
+            console.log(result.data[0]);
+            console.log(course);
+        })
+        .catch(err => console.log(err));
+    }, []);
+ 
 
     const excercises = [
         {
@@ -57,6 +60,15 @@ function Course() {
             type: "luyện tập",
             createAt: "20/03/2023",
             deleteAt: ""
+        },
+        {
+            maHP: "IT3150",
+            kiHoc: "2023.2",
+            maLop: "123321",
+            numQuestion: 20,
+            type: "Giua ky",
+            createAt: "20/03/2023",
+            deleteAr: ""
         }
     ];
 
@@ -65,14 +77,20 @@ function Course() {
             <div className="container">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></link>
 
-                <h2>{course.name}</h2>
+                <h2>{course.nameCourse}</h2>
+                <b><p>Mô tả: </p></b>
                 <p>{course.description}</p>
                 <div className="quiz-list-container">
                 {excercises.map((quiz, index) => (
                 <li key={index} className="quiz-item">
                     <img src="https://img.freepik.com/premium-vector/quiz-logo-with-speech-bubble-symbols-concept-questionnaire-show-sing-quiz-button-question-competition-exam-interview-modern-emblem_180786-72.jpg" className="logo"/>
                     <div className="quiz-info">
-                        <h2>{"Quiz " + quiz.numExcercise}</h2>
+                        {(quiz.type == "luyện tập") ? (
+                            <h2>{"Quiz " + quiz.numExcercise}</h2>
+                        ) : (
+                            <h2>{"Thi " + quiz.type}</h2>
+                        )}
+                        
                         <p>{"Số câu hỏi: " + quiz.numQuestion}</p>
                         <p>{"Điểm: " + quiz.score}</p>
 

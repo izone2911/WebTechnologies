@@ -52,6 +52,19 @@ function MyCourse() {
 		}
     }
 
+    // navigate course page
+    const navigate = useNavigate();
+    const handleSwitchToCourse = async (course)=>{
+        navigate(`/course/${course.maLop}`);
+        // try{
+        //     const res = await axios.post("http://localhost:4000/api/mycourse/getcourse", course);
+        //     console.log(res.data);
+        //     console.log("Get course successfully");
+        // }catch (err) {
+        //     console.error("Get course failed", err);
+        // }
+    }
+
     // add student into course
     var addedStudent = "";
     var [courseChoice, setCourseChoice] = useState();
@@ -86,7 +99,7 @@ function MyCourse() {
     };
     const handleEditCourse = async(course)=>{
         // courseChoice = course;
-        const res = await axios.post("http://localhost:4000/api/mycourse/deletecourse", {course: courseChoice});
+        const res = await axios.post("http://localhost:4000/api/mycourse/editcourse", {course: courseChoice});
         console.log(res);
         toggleEditCourse({dumb: "dumb"});
     }
@@ -106,7 +119,7 @@ function MyCourse() {
         axios.post("http://localhost:4000/api/mycourse/getmycourse", {email: acc.email})
         .then(result =>{
             setCourses(result.data);
-            console.log(courses);
+            console.log(result.data);
         })
         .catch(err => console.log(err));
     }, []);
@@ -128,7 +141,8 @@ function MyCourse() {
                         <p><strong>Giảng viên:</strong> {course.author}</p>
                         <p><strong>Kỳ học:</strong> {course.kiHoc}</p>
 
-                        <button>Tiếp tục học</button>
+                        <button onClick={()=> handleSwitchToCourse(course)}>Tiếp tục học</button>
+                        
                         <div className="setting">
                             <button className="setting-button"><i class="fas fa-cog"></i></button>
                             {(acc.role == "lecturer") ? (
@@ -243,7 +257,7 @@ function MyCourse() {
 
                         <div className="mb-2">
                             <label htmlFor="">Mã học phần</label>
-                            <input type="text" className="form-control"
+                            <input type="text" className="form-control" value={"abc"}
                             onChange={(e)=> newCourse.maHP = e.target.value}/>
                         </div>
 

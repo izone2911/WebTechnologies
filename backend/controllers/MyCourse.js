@@ -14,6 +14,19 @@ export const getMyCourse = async (req,res)=>{
     }
 }
 
+export const getCourse = async (req, res) => {
+    // const tmp = req.body;
+    // console.log(maLop);
+    try {
+        const blog = await CourseModel.find({maLop: req.body.maLop.id})
+        res.json(blog);
+    } catch(err) {
+        res.status(500).json({
+            error: err.message
+        })
+    }
+}
+
 export const addNewCourse = async (req,res) => {
     try {
         const blog = await CourseModel.create(req.body);
