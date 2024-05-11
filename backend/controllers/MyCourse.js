@@ -1,5 +1,6 @@
 import { CourseModel } from "../models/Course.js";
 import { CourseAccountModel } from "../models/Course.js";
+import { ExamModel, ExerciseModel } from "../models/Exam.js";
 
 export const getMyCourse = async (req,res)=>{
     const {email} = req.body;
@@ -15,11 +16,16 @@ export const getMyCourse = async (req,res)=>{
 }
 
 export const getCourse = async (req, res) => {
-    // const tmp = req.body;
-    // console.log(maLop);
+    const maLop = req.body.maLop.id
     try {
-        const blog = await CourseModel.find({maLop: req.body.maLop.id})
-        res.json(blog);
+        const course = await CourseModel.find({maLop});
+        const exams = await ExamModel.find({maLop});
+        const exercises = await ExerciseModel.find({maLop});
+        res.json({
+            course: course,
+            exams: exams,
+            exercises: exercises
+        });
     } catch(err) {
         res.status(500).json({
             error: err.message

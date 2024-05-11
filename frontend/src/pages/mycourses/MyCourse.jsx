@@ -130,38 +130,38 @@ function MyCourse() {
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></link>
 
             <div className="course-list-container">
-            <h1 style={{marginBottom: "20px"}}>Khóa học của tôi</h1>
-            <ul className="course-list">
-              {courses.map((course, index) => (
-                <li key={index} className="course-item">
-                    <img src={course.img} alt="" className="logo"/>
-                    <div className="course-info">
-                        <h2>{course.nameCourse}</h2>
-                        <p><strong>Mã học phần:</strong> {course.maHP}</p>
-                        <p><strong>Giảng viên:</strong> {course.author}</p>
-                        <p><strong>Kỳ học:</strong> {course.kiHoc}</p>
+                <h1 style={{marginBottom: "20px"}}>Khóa học của tôi</h1>
+                <ul className="course-list">
+                {courses.map((course, index) => (
+                    <li key={index} className="course-item">
+                        <img src={course.img} alt="" className="logo"/>
+                        <div className="course-info">
+                            <h2>{course.nameCourse}</h2>
+                            <p><strong>Mã học phần:</strong> {course.maHP}</p>
+                            <p><strong>Giảng viên:</strong> {course.author}</p>
+                            <p><strong>Kỳ học:</strong> {course.kiHoc}</p>
 
-                        <button onClick={()=> handleSwitchToCourse(course)}>Tiếp tục học</button>
-                        
-                        <div className="setting">
-                            <button className="setting-button"><i class="fas fa-cog"></i></button>
-                            {(acc.role == "lecturer") ? (
-                                <div className="dropDownSetting">
-                                    <a onClick={()=>togglePopupAddStudent(course)}>Add student</a> <br />
-                                    <a onClick={()=> toggleEditCourse(course)}>Edit</a> <br />
-                                    <a onClick={()=> handleDeleteCourse(index, course)}>Delete</a>
-                                </div>
-                            ) : (
-                                <div className="dropDownSetting">
-                                    <a href="" onClick="">Hủy ghi danh</a>
-                                </div>
-                            )}
+                            <button onClick={()=> handleSwitchToCourse(course)}>Tiếp tục học</button>
+                            
+                            <div className="setting">
+                                <button className="setting-button"><i class="fas fa-cog"></i></button>
+                                {(acc.role == "lecturer") ? (
+                                    <div className="dropDownSetting">
+                                        <a onClick={()=>togglePopupAddStudent(course)}>Add student</a> <br />
+                                        <a onClick={()=> toggleEditCourse(course)}>Edit</a> <br />
+                                        <a onClick={()=> handleDeleteCourse(index, course)}>Delete</a>
+                                    </div>
+                                ) : (
+                                    <div className="dropDownSetting">
+                                        <a href="" onClick="">Hủy ghi danh</a>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                    </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+                    </li>
+                ))}
+                </ul>
+            </div>
           <div className="controller">
               <div className="search-course">
                 <h2>Tìm trong khóa học của tôi</h2>

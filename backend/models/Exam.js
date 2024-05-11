@@ -6,10 +6,10 @@ const examSchema = new Schema({
     maHP: String,
     kiHoc: String,
     maLop: String,
-    numQuestion: String,
+    numQuestion: Number,
     title: String,
     type: String,
-    question: String,
+    question: Object,
     answer: Object,
     createAt: {
         type: Date,
@@ -19,6 +19,27 @@ const examSchema = new Schema({
         type: String,
         default: "in use"
     }
-})
+});
 
-export const ExamModel = model("exams",examSchema)
+const exerciseSchema = new Schema({
+    exerciseID: String,
+    maHP: String,
+    kiHoc: String,
+    maLop: String,
+    numQuestion: Number,
+    title: String,
+    type: String,
+    question: Object,
+    answer: Object,
+    createAt: {
+        type: Date,
+        default: Date.now,
+    },
+    deleteAt: {
+        type: String,
+        default: "in use"
+    }
+});
+
+export const ExamModel = model("exams",examSchema);
+export const ExerciseModel = model("exercises",exerciseSchema);
