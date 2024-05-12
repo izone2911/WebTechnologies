@@ -56,13 +56,6 @@ function MyCourse() {
     const navigate = useNavigate();
     const handleSwitchToCourse = async (course)=>{
         navigate(`/course/${course.maLop}`);
-        // try{
-        //     const res = await axios.post("http://localhost:4000/api/mycourse/getcourse", course);
-        //     console.log(res.data);
-        //     console.log("Get course successfully");
-        // }catch (err) {
-        //     console.error("Get course failed", err);
-        // }
     }
 
     // add student into course
@@ -115,6 +108,8 @@ function MyCourse() {
     }
     
     // display courses
+
+    // get courses of acc from server
     useEffect(()=>{
         axios.post("http://localhost:4000/api/mycourse/getmycourse", {email: acc.email})
         .then(result =>{

@@ -33,6 +33,19 @@ export const getCourse = async (req, res) => {
     }
 }
 
+export const getAllCourse = async (req, res) => {
+    try {
+        const courses = await CourseModel.find();
+        res.json({
+            courses: courses,
+        });
+    } catch(err) {
+        res.status(500).json({
+            error: err.message
+        })
+    }
+}
+
 export const addNewCourse = async (req,res) => {
     try {
         const blog = await CourseModel.create(req.body);
