@@ -118,13 +118,12 @@ export const deleteCourse = async (req,res) => {
 
 export const updateCourse = async (req,res) => {
     try {
-        // const blog = req.body.course;
-        // await CourseModel.update({ maLop: blog.maLop }, {$set: {nameCourse: blog.nameCourse}});
-
-        // await CourseAccountModel.updateMany({ maLop: blog.maLop }, {$set: {nameCourse: blog.nameCourse}});
+        const blog = req.body.course;
+        await CourseModel.updateOne({ maLop: blog.maLop }, {$set: {nameCourse: blog.nameCourse}});
+        await CourseAccountModel.updateMany({ maLop: blog.maLop }, {$set: {nameCourse: blog.nameCourse}});
 
         res.json({
-            message: "Update course successful"
+            message: "Update successfully"
         });
     } catch(err) {
         res.status(500).json({

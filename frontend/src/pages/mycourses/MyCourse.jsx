@@ -93,8 +93,8 @@ function MyCourse() {
         setEditCoursePopUp(!editCoursePopUp);
     };
     const handleEditCourse = async(index, course)=>{
-        const res = await axios.post("http://localhost:4000/api/mycourse/editcourse", {course: course});
-        console.log(res);
+        const res = await axios.post("http://localhost:4000/api/mycourse/updatecourse", {course: course});
+        console.log(res.data);
         courses[index] = course; 
         toggleEditCourse(course);
 
