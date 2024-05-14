@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useContext, useState , useEffect} from "react";
-import axios from "axios"
+import axios from "axios";
 
 import './dependencies/css/style.css';
 
@@ -19,6 +19,8 @@ function MyCourse() {
 
     const acc = teacher_acc;
     const [courses, setCourses] = useState([]);
+
+    const [indexCourseChoice, setIndexCourseChoice] = useState();
 
     // add new course handle
     const [addCoursePopUp, setAddCoursePopUp] = useState(false);
@@ -60,19 +62,20 @@ function MyCourse() {
 
     // add student into course
     var addedStudent = "";
-    var [courseChoice, setCourseChoice] = useState();
+    // var [courseChoice, setCourseChoice] = useState();
+    
 
     const [addStudentPopUp, setAddStudentPopUp] = useState(false);
-    const togglePopupAddStudent = (course) => {
-        setCourseChoice(course);
+    const togglePopupAddStudent = (index) => {
+        setIndexCourseChoice(index);
         setAddStudentPopUp(!addStudentPopUp);
     };
 
     const handleAddStudent = async ()=>{
         try {
-            console.log("Dumb cost");
-            console.log(courseChoice);
-            const res = await axios.post("http://localhost:4000/api/mycourse/addstudent", {student: addedStudent, course: courseChoice});
+            const course = courses[indexCourseChoice];
+            console.log(course);
+            const res = await axios.post("http://localhost:4000/api/mycourse/addstudent", {student: addedStudent, course: course});
             console.log(res.data);
             console.log("Add student successfull");
             togglePopupAddStudent();
@@ -83,28 +86,28 @@ function MyCourse() {
     }
 
     // edit course
-    var courseEdit = {};
+    // var indexEdit ;
     const [editCoursePopUp, setEditCoursePopUp] = useState(false);
-    const toggleEditCourse = (course)=>{
-        setCourseChoice(course);
-        console.log(courseChoice);
+    const toggleEditCourse = (index)=>{
+        setIndexCourseChoice(index);
         setEditCoursePopUp(!editCoursePopUp);
     };
-    const handleEditCourse = async(course)=>{
-        // courseChoice = course;
-        const res = await axios.post("http://localhost:4000/api/mycourse/editcourse", {course: courseChoice});
+    const handleEditCourse = async(index, course)=>{
+        const res = await axios.post("http://localhost:4000/api/mycourse/editcourse", {course: course});
         console.log(res);
-        toggleEditCourse({dumb: "dumb"});
+        courses[index] = course; 
+        toggleEditCourse(course);
+
     }
 
     // delete course
-    const handleDeleteCourse = async(index, course)=>{
-        setCourseChoice(course);
-        courseChoice = course;
-        console.log(courseChoice);
+    const handleDeleteCourse = async(index)=>{
+        setIndexCourseChoice(index);
+        const course = courses[index];
+        console.log("Delete " + course.nameCourse);
         courses.splice(index, 1);
-        const res = await axios.post("http://localhost:4000/api/mycourse/deletecourse", {course: courseChoice});
-        console.log(res.data)
+        const res = await axios.post("http://localhost:4000/api/mycourse/deletecourse", {course: course});
+        console.log(res.data);
     }
     
     // display courses
@@ -142,9 +145,9 @@ function MyCourse() {
                                 <button className="setting-button"><i class="fas fa-cog"></i></button>
                                 {(acc.role == "lecturer") ? (
                                     <div className="dropDownSetting">
-                                        <a onClick={()=>togglePopupAddStudent(course)}>Add student</a> <br />
-                                        <a onClick={()=> toggleEditCourse(course)}>Edit</a> <br />
-                                        <a onClick={()=> handleDeleteCourse(index, course)}>Delete</a>
+                                        <a onClick={()=>togglePopupAddStudent(index)}>Add student</a> <br />
+                                        <a onClick={()=> toggleEditCourse(index)}>Edit</a> <br />
+                                        <a onClick={()=> handleDeleteCourse(index)}>Delete</a>
                                     </div>
                                 ) : (
                                     <div className="dropDownSetting">
@@ -244,66 +247,71 @@ function MyCourse() {
         </div>
     );
 
-    const popup_editCourse = (
-        <div className="popup-overlay">
+    const popup_editCourse = (index) => {
+        const course = courses[index];
+        console.log("abc");
+        console.log(index);
+        return (
+            <div className="popup-overlay">
                 <div className="popup">
                     <div className="popup-content">
                         <h2>Chỉnh sửa khóa học</h2>
 
                         <div className="mb-2">
                             <label htmlFor="">Mã học phần</label>
-                            <input type="text" className="form-control" value={"abc"}
-                            onChange={(e)=> newCourse.maHP = e.target.value}/>
+                            <input type="text" className="form-control" defaultValue={course.maHP}
+                            onChange={(e)=> course.maHP = e.target.value}/>
                         </div>
 
                         <div className="mb-2">
                             <label htmlFor="">Kỳ học</label>
-                            <input type="text" className="form-control"
-                            onChange={(e)=> newCourse.kiHoc = e.target.value}/>
+                            <input type="text" className="form-control" defaultValue={course.kiHoc}
+                            onChange={(e)=> course.kiHoc = e.target.value}/>
                         </div>
 
                         <div className="mb-2">
                             <label htmlFor="">Mã lớp</label>
-                            <input type="text" className="form-control"
-                            onChange={(e)=> newCourse.maLop = e.target.value}/>
+                            <input type="text" className="form-control" defaultValue={course.maLop}
+                            onChange={(e)=> course.maLop = e.target.value}/>
                         </div>
 
                         <div className="mb-2">
                             <label htmlFor="">Tên môn học</label>
-                            <input type="text"  className="form-control" value={courseEdit.nameCourse}
-                            onChange={(e)=> newCourse.nameCourse = e.target.value}/>
+                            <input type="text"  className="form-control" defaultValue= {course.nameCourse}
+                            onChange={(e)=> course.nameCourse = e.target.value}/>
                         </div>
 
                         <div className="mb-2">
                             <label htmlFor="">Mô tả</label>
-                            <input type="text"  className="form-control"
-                            onChange={(e)=> newCourse.description = e.target.value}/>
+                            <input type="text"  className="form-control" defaultValue={course.description}
+                            onChange={(e)=> course.description = e.target.value}/>
                         </div>
 
                         <div className="mb-2">
                             <label htmlFor="">Ảnh mô tả</label>
-                            <input type="url"  className="form-control"
-                            onChange={(e)=> newCourse.img = e.target.value}/>
+                            <input type="url"  className="form-control" defaultValue={course.img}
+                            onChange={(e)=> course.img = e.target.value}/>
                         </div>
 
                         <div className="mb-2">
                             <label htmlFor="">Ngày kết thúc</label>
-                            <input type="date"  className="form-control"
-                            onChange={(e)=> newCourse.deleteAt = e.target.value}/>
+                            <input type="date"  className="form-control" defaultValue={course.deleteAt}
+                            onChange={(e)=> course.deleteAt = e.target.value}/>
                         </div>
 
-                        <button className="btn btn-success" >Submit</button>
+                        <button className="btn btn-success" onClick={(e)=>handleEditCourse(index, course)}>Submit</button>
                         <button className="btn btn-danger" onClick={toggleEditCourse}>Close</button>
                     </div>
                 </div>
             </div>
-    );
+        )
+    };
 
     return (
         <div className="app-container">
             {addCoursePopUp && popup_addCourse}
             {addStudentPopUp && popup_addStudent}
-            {editCoursePopUp && popup_editCourse}
+            {editCoursePopUp && popup_editCourse(indexCourseChoice)}
             <CourseList courses={courses} />
         </div>
     )
