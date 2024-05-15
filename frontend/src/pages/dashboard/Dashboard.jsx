@@ -3,6 +3,7 @@ import React, { useContext, useState , useEffect} from "react";
 import axios from "axios";
 
 import './dependencies/css/style.css';
+import liveSearch from "../mycourses/LiveSearch";
 
 function Dashboard() {
     const [courses, setCourses] = useState([
@@ -36,8 +37,14 @@ function Dashboard() {
         navigate(`/course/${course.maLop}`);
     }
 
+    // search 
+    const searchCourse = (search_info)=>{
+        setCourses(liveSearch({search_info, courses}));
+    }
+
     // course list
     const CourseList = ({ courses }) => {
+        var search_infor = "default";
         return (
           <div className="container">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></link>
@@ -64,8 +71,8 @@ function Dashboard() {
           <div className="controller">
               <div className="search-course">
                 <h2>Tìm trong khóa học của tôi</h2>
-                <input type="text" placeholder="Nhập tên khóa học" />
-                <button>Tìm kiếm</button>
+                <input type="text" placeholder="Nhập tên khóa học" onChange={(e)=> search_infor = e.target.value}/>
+                <button onClick={()=> searchCourse(search_infor)}>Tìm kiếm</button>
               </div>
           </div>
         </div>

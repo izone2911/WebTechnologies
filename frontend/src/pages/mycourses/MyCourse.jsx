@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useContext, useState , useEffect} from "react";
 import axios from "axios";
+import liveSearch from "./LiveSearch";
 
 import './dependencies/css/style.css';
 
@@ -62,9 +63,6 @@ function MyCourse() {
 
     // add student into course
     var addedStudent = "";
-    // var [courseChoice, setCourseChoice] = useState();
-    
-
     const [addStudentPopUp, setAddStudentPopUp] = useState(false);
     const togglePopupAddStudent = (index) => {
         setIndexCourseChoice(index);
@@ -92,6 +90,7 @@ function MyCourse() {
         setIndexCourseChoice(index);
         setEditCoursePopUp(!editCoursePopUp);
     };
+
     const handleEditCourse = async(index, course)=>{
         const res = await axios.post("http://localhost:4000/api/mycourse/updatecourse", {course: course});
         console.log(res.data);
@@ -117,12 +116,19 @@ function MyCourse() {
         axios.post("http://localhost:4000/api/mycourse/getmycourse", {email: acc.email})
         .then(result =>{
             setCourses(result.data);
-            console.log(result.data);
+            // console.log(result.data);
         })
         .catch(err => console.log(err));
     }, []);
 
+    // search course
+    const searchCourse = (search_info)=>{
+        setCourses(liveSearch({search_info, courses}));
+    }
+
     const CourseList = ({ courses }) => {
+        var search_info = "an toàn";
+
         return (
           <div className="container">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></link>
@@ -163,8 +169,8 @@ function MyCourse() {
           <div className="controller">
               <div className="search-course">
                 <h2>Tìm trong khóa học của tôi</h2>
-                <input type="text" placeholder="Nhập tên khóa học" />
-                <button>Tìm kiếm</button>
+                <input type="text" placeholder="Nhập tên khóa học" onChange={(e)=> search_info = e.target.value}/>
+                <button onClick={() => searchCourse(search_info)}>Tìm kiếm</button>
               </div>
               {(acc.role == "lecturer")? (
                     <button id="add-course" onClick={togglePopup}>Thêm khóa học</button>
