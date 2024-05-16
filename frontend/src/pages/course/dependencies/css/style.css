@@ -1,0 +1,21 @@
+.container2{
+    display: flex;
+    flex-direction: column;
+}
+.quiz-item{
+    display: flex;
+    align-items: center;
+    border: 3px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.exam-item{
+    display: flex;
+    align-items: center;
+    border: 3px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 10px;
+}

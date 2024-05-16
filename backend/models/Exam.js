@@ -17,6 +17,25 @@ const examSchema = new Schema({
         type: String,
         default: "in use"
     }
-})
+});
 
-export const ExamModel = model("exams",examSchema)
+const exerciseSchema = new Schema({
+    exerciseID: String,
+    maHP: String,
+    kiHoc: String,
+    maLop: String,
+    title: String,
+    questions: Object,
+    answers: Object,
+    createAt: {
+        type: Date,
+        default: Date.now,
+    },
+    deleteAt: {
+        type: String,
+        default: "in use"
+    }
+});
+
+export const ExamModel = model("exams",examSchema);
+export const ExerciseModel = model("exercises",exerciseSchema);
