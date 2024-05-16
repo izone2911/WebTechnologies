@@ -71,7 +71,6 @@ const Login = () => {
 						<span class="label-input100"></span>
 					</div>
 					
-					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<input class="input100" type="password" name="password" onChange={handleChange} placeholder="Password"/>
 						<span class="focus-input100"></span>
