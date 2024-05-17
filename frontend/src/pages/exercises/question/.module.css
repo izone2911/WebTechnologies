@@ -1,0 +1,27 @@
+.questionBox {
+    width: 100%; height: fit-content;
+    padding: 15px; 
+    margin: 0 0 15px 10px;
+    word-break: break-word;
+    line-height: 19px;
+}
+.question {
+    display: flex;
+    margin: -1px 0 10px 0;
+}
+.indexs {
+    min-width:16px;
+}
+
+.operator {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; height: fit-content;
+    margin: 7px 0 0 0;
+}
+
+.operator > button {
+    padding: 0 10px 0 10px;
+    border-radius: 7px;
+    background-color: whitesmoke;
+}
