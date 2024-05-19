@@ -3,6 +3,7 @@ import React, { useContext, useState , useEffect} from "react";
 import axios from "axios";
 
 import './dependencies/css/style.css';
+import { AuthContext } from "../../context/authContext";
 
 function MyCourse() {
     const student_acc = {
@@ -11,13 +12,40 @@ function MyCourse() {
         role: "student"
     }; // fixed student account 
 
-    const teacher_acc = {
+    const teacher_acc1 = {
         email: "huyteach@gmail.com",
         name: "Thầy Huy",
         role: "lecturer"
-    }  // fixed teacher account
+    }  // fixed teacher account 1
 
-    const acc = teacher_acc;
+    const teacher_acc2 = {
+        email: "huylostteach@gmail.com",
+        name: "Thầy Huy Hà Thành",
+        role: "lecturer"
+    }  // fixed teacher account 2
+
+    const [acc, setAcc] = useState({});
+
+    // Get account
+    const { currentUser } = useContext(AuthContext);
+    console.log("email current : ");
+    console.log(currentUser.email);
+
+    useEffect(() => {
+        if (currentUser && currentUser.email) {
+            axios.post("http://localhost:4000/api/auth/login", { email: currentUser.email })
+                .then(result => {
+                    setAcc(result.data[0]);
+                    console.log("DUMB");
+                    console.log(acc);
+                })
+                .catch(err => console.log(err));
+        }
+    }, []);
+    
+    // console.log("Acc : ");
+    // console.log(acc);
+
     const [courses, setCourses] = useState([]);
 
     const [indexCourseChoice, setIndexCourseChoice] = useState();

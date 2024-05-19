@@ -48,7 +48,7 @@ const Login = () => {
 				return
 			} else {
 				login(inputs)
-				navigate("/courses")
+				navigate("/mycourse")
 			}
 		} catch (err) {
 			console.error("Login failed",err)

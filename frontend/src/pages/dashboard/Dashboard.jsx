@@ -3,7 +3,6 @@ import React, { useContext, useState , useEffect} from "react";
 import axios from "axios";
 
 import './dependencies/css/style.css';
-import liveSearch from "../mycourses/LiveSearch";
 
 function Dashboard() {
     const [courses, setCourses] = useState([
