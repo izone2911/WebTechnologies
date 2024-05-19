@@ -24,7 +24,7 @@ function Option ({ idOption, idQuestion, setIsRefreshParent }) {
                 dataUpdate.answers = {idQuestion, idOption, type, choose : answer.includes(idOption)}
                 dataUpdate.userID = currentUser.email
                 console.log("dataUpdate_______",dataUpdate)
-                const response = await axios.post('http://localhost:4000/api/exam/update/'+examID, dataUpdate , {
+                const response = await axios.post('http://localhost:4000/api/exercise/update/'+examID, dataUpdate , {
                     headers: {'Content-Type': 'application/json'}
                 })
             } catch (error) {

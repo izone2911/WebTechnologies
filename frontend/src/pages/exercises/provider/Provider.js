@@ -20,7 +20,7 @@ function Provider({ children }) {
             const storedExamData = localStorage.getItem('storedExamData');
             
             try {
-                const response = await axios.post('http://localhost:4000/api/exam/run/'+examID, {
+                const response = await axios.post('http://localhost:4000/api/exercise/run/'+examID, {
                     "userID" : currentUser.email
                 } ,{
                     headers: {'Content-Type': 'application/json'}
@@ -51,7 +51,7 @@ function Provider({ children }) {
     useEffect(()=>{ 
         if(state.isExamFinished) {
             localStorage.removeItem('storedExamData');
-            navigate('/mycourses')
+            navigate('/mycourse')
         }
     }, [navigate, state.isExamFinished])
     

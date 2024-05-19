@@ -1,7 +1,7 @@
 import {ExerciseModel} from "../models/Exam.js"
 import { ExerciseAccountModel } from "../models/ExerciseAccount.js"
 
-export const createExam = async (req,res) => {
+export const createExercise = async (req,res) => {
     try {
         console.log(req.body)
         const blog = await ExerciseModel.create(req.body)
@@ -13,13 +13,14 @@ export const createExam = async (req,res) => {
     }
 }
 
-export const getExam = async (req,res) => {
+export const getExercise = async (req,res) => {
     try {
-        const exam = await ExerciseAccountModel.find({examID : req.params.examID,userID : req.body.userID})
+        const exam = await ExerciseAccountModel.find({exerciseID : req.params.examID,userID : req.body.userID})
+        console.log("exam nè----------------",exam)
         if(exam.length===0) {
-            const dataExam = await ExerciseModel.find({examID : req.params.examID})
+            const dataExam = await ExerciseModel.find({exerciseID : req.params.examID})
             let dataExamAccount = {}
-            dataExamAccount.examID      = dataExam[0].examID
+            dataExamAccount.exerciseID      = dataExam[0].exerciseID
             dataExamAccount.userID      = req.body.userID
             dataExamAccount.title       = dataExam[0].title
             dataExamAccount.questions   = dataExam[0].questions
@@ -42,9 +43,9 @@ export const getExam = async (req,res) => {
     }
 }
 
-export const updateExamAccount = async (req,res) => {
+export const updateExerciseAccount = async (req,res) => {
     try { 
-        const exam = await ExerciseAccountModel.find({examID : req.params.examID,userID : req.body.userID})
+        const exam = await ExerciseAccountModel.find({exerciseID : req.params.examID,userID : req.body.userID})
         
         let arrayUserAnswers = exam[0].userAnswers.userAnswers
         let newArr = arrayUserAnswers.filter(item => {
@@ -57,7 +58,7 @@ export const updateExamAccount = async (req,res) => {
         newArr = [...newArr,req.body.answers]
         let updateData = JSON.parse(JSON.stringify(exam[0]))
         updateData.userAnswers.userAnswers = newArr
-        await ExerciseAccountModel.updateOne({examID : req.params.examID,userID : req.body.userID},updateData)
+        await ExerciseAccountModel.updateOne({exerciseID : req.params.examID,userID : req.body.userID},updateData)
         res.json({success : "success"})
     } catch(err) {
         res.status(500).json({

@@ -19,7 +19,7 @@ function Aside({ setIsRefreshParent }) {
 
         for (let i=0; i < questions.length; i++) {
             background = (answers[i] && answers[i].length) ?
-                'blue': 'white'
+                'rgb(0, 89, 255)': 'white'
 
             linkBoxs.push(
                 <label key={i} className={"kimcenter "+styles.linkBox} style={{background}}>

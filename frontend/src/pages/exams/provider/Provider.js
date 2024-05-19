@@ -51,7 +51,7 @@ function Provider({ children }) {
     useEffect(()=>{ 
         if(state.isExamFinished) {
             localStorage.removeItem('storedExamData');
-            navigate('/mycourses')
+            navigate('/mycourse')
         }
     }, [navigate, state.isExamFinished])
     

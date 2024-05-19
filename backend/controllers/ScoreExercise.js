@@ -4,7 +4,7 @@ import {ExerciseModel} from "../models/Exam.js"
 export const addScore = async (req,res) => {
     try {
         console.log(req.body)
-        const exam = await ExerciseModel.find({examID : req.body.examID})
+        const exam = await ExerciseModel.find({exerciseID : req.body.examID})
         const answers = exam[0].answers.answers
         
         const userAnswers = req.body.answers
@@ -32,7 +32,7 @@ export const addScore = async (req,res) => {
 
         const response = await ScoreExerciseModel.create({
             userID : req.body.userID,
-            examID : req.body.examID,
+            exerciseID : req.body.examID,
             numTrue: numTrue,
             numQues: numQues,
             score  : score

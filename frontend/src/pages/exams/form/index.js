@@ -44,7 +44,7 @@ function Form ({ setIsRefreshParent }) {
         let results = window.confirm(checkFully());
         if(!results) return false;
 
-        axios.post('http://localhost:4000/api/score', {answers: state.user.answers, userID: currentUser.email, examID: examID}, 
+        axios.post('http://localhost:4000/api/scoreExam', {answers: state.user.answers, userID: currentUser.email, examID: examID}, 
         { headers: { 'Content-Type': 'application/json' }})
 
         dispatch(setExamFinished());
@@ -70,8 +70,7 @@ function Form ({ setIsRefreshParent }) {
         >{QuestionBoxs()}
         </form>
         <footer className={"kimcenter "+styles.footer}>
-            <div>
-                <img src={Circle} alt="" width='37px' className={styles.logo}/>
+            <div width='37px'>
             </div>
             <div className={styles.shift}>
                 <button disabled={currentBox < 1} className='kimpointer'

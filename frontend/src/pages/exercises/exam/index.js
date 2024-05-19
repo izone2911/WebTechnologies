@@ -4,7 +4,7 @@ import Aside from "../aside"
 import Form from "../form"
 import '../customlibrary/basic.css'
 
-const Exam = () => {
+const Exercise = () => {
     const [isRefresh, setIsRefresh] = useState(false)
     useEffect(()=>{}, [isRefresh])
 
@@ -18,4 +18,4 @@ const Exam = () => {
     )
 }
 
-export default Exam;
+export default Exercise;

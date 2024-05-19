@@ -25,7 +25,14 @@ import ExamRoutes from "./routes/Exam.js"
 app.use("/api/exam",ExamRoutes)
 //////////////////////////////////////////////////////////////////////
 import ScoreExamRoutes from "./routes/ScoreExam.js"
-app.use("/api/score",ScoreExamRoutes)
+app.use("/api/scoreExam",ScoreExamRoutes)
+
+//////////////////////////////////////////////////////////////////////
+import ExerciseRoutes from "./routes/Exercise.js"
+app.use("/api/exercise",ExerciseRoutes)
+//////////////////////////////////////////////////////////////////////
+import ScoreExerciseRoutes from "./routes/ScoreExercise.js"
+app.use("/api/scoreExercise",ScoreExerciseRoutes)
 
 ///////////////////////////////////////////////////////////////////
 import MyCourseRoutes from "./routes/MyCourse.js";

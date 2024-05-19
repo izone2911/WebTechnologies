@@ -3,7 +3,7 @@ const Schema = _Schema
 
 const scoreExerciseSchema = new Schema({
     userID: String, // = email
-    examID: String, // = exerciseID
+    exerciseID: String, // = exerciseID
     numTrue: Number,
     numQues: Number,
     score: Number, 
@@ -17,4 +17,4 @@ const scoreExerciseSchema = new Schema({
     }
 })
 
-export const ScoreExerciseModel = model("score_exams",scoreExerciseSchema)
+export const ScoreExerciseModel = model("score_exercises",scoreExerciseSchema)
