@@ -9,6 +9,7 @@ const accountSchema = new Schema({
     birthday: Date,
     address: String,
     phoneNumber: String,
+    avatar: String,
     createAt: {
         type: Date,
         default: Date.now,
