@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Tilt from "react-parallax-tilt";
 import axios from "axios"
 
@@ -12,6 +12,8 @@ import './dependencies/vendor/select2/select2.min.css';
 import './dependencies/css/util.css';
 import './dependencies/css/main.css';
 import './styleDiv.css'
+
+import $ from 'jquery'
 
 const Register = () => {
 
@@ -53,6 +55,19 @@ const Register = () => {
         }
     };
 
+	useEffect(() => {
+        $('.input100').each(function(){
+            $(this).on('blur', function(){
+                if($(this).val().trim() != "") {
+                    $(this).addClass('has-val');
+                }
+                else {
+                    $(this).removeClass('has-val');
+                }
+            })    
+        })
+    }, [])
+
     return(
         <div class="limiter">
 		<div class="container-login100">
@@ -61,32 +76,41 @@ const Register = () => {
 					<span class="login100-form-title p-b-43">
 						Sign up
 					</span>
-					<span>{inputs.email} </span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email" onChange={handleChange}/>
+						<input class="input100" type="text" name="email" onChange={handleChange}/>
 						<span class="focus-input100"></span>
-						<span class="label-input100"></span>
+						<span class="label-input100">Email</span>
 					</div>
-					
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="password" placeholder="Password" onChange={handleChange}/>
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid role">
+						<select class="input100" name="role" onChange={handleChange} style={{border:"0",appearance:"none",outline:"none",height:"78px"}}>
+							<option value="" disabled selected style={{display:"none"}}></option>
+							<option value="Teacher">Teacher</option>
+							<option value="Student">Student</option>
+						</select>
 						<span class="focus-input100"></span>
-						<span class="label-input100"></span>
+						<span class="label-input100">Role</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input100" type="password" name="password" onChange={handleChange}/>
+						<span class="focus-input100"></span>
+						<span class="label-input100">Password</span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="repassword" placeholder="Confirm Password" onChange={handleChange}/>
+						<input class="input100" type="password" name="repassword" onChange={handleChange}/>
 						<span class="focus-input100"></span>
-						<span class="label-input100"></span>
+						<span class="label-input100">Confirm password</span>
 					</div>
 					{checkConfirmPassword===true ? 
-					<div class="flex-sb-m w-full p-t-3 p-b-32">
+					<div class="flex-sb-m w-full p-t-3 p-b-32" style={{paddingBottom:"0",height:"30px"}}>
 						<div class="contact100-form-checkbox">
 						</div>
 					</div>: 
-					<div class="flex-sb-m w-full p-t-3 p-b-32">
-						<div class="contact100-form-checkbox">
+					<div class="flex-sb-m w-full p-t-3 p-b-32" style={{paddingBottom:"0",height:"30px"}}>
+						<div class="contact100-form-checkbox" style={{marginLeft:"15px",fontSize:"18px",color:"red"}}>
 							Confirmation password does not match
 						</div>
 					</div>

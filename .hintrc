@@ -17,7 +17,8 @@
         "ignore": [
           "height: fit-content",
           "accent-color",
-          "scale"
+          "scale",
+          "-webkit-overflow-scrolling"
         ]
       }
     ]

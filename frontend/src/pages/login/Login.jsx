@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Tilt from "react-parallax-tilt";
 import axios from "axios"
 import { AuthContext } from "../../context/authContext";
@@ -11,6 +11,8 @@ import './dependencies/vendor/select2/select2.min.css';
 import './dependencies/css/util.css';
 import './dependencies/css/main.css';
 import './styleDiv.css'
+
+import $ from 'jquery'
 
 const Login = () => {
 
@@ -48,12 +50,26 @@ const Login = () => {
 				return
 			} else {
 				login(inputs)
-				navigate("/courses")
+				navigate("/dashboard")
 			}
 		} catch (err) {
 			console.error("Login failed",err)
 		}
 	}
+
+	useEffect(() => {
+        $('.input100').each(function(){
+            $(this).on('blur', function(){
+                if($(this).val().trim() != "") {
+                    $(this).addClass('has-val');
+                }
+                else {
+                    $(this).removeClass('has-val');
+                }
+            })    
+        })
+    }, [])
+
 
     return(
         <div class="limiter">
@@ -66,20 +82,21 @@ const Login = () => {
 					
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" onChange={handleChange} placeholder="Email"/>
+						<input class="input100" type="text" name="email" onChange={handleChange}/>
 						<span class="focus-input100"></span>
-						<span class="label-input100"></span>
+						<span class="label-input100">Email</span>
 					</div>
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="password" onChange={handleChange} placeholder="Password"/>
+						<input class="input100" type="password" name="password" onChange={handleChange}/>
 						<span class="focus-input100"></span>
-						<span class="label-input100"></span>
+						<span class="label-input100">Password</span>
 					</div>
+					
 
-					<div class="flex-sb-m w-full p-t-3 p-b-32">
+					<div class="flex-sb-m w-full p-t-3 p-b-32" style={{paddingBottom:"0",height:"30px"}}>
 						{errLogin?
-						<div class="contact100-form-checkbox">
+						<div class="contact100-form-checkbox"  style={{marginLeft:"20px",fontSize:"18px",color:"red"}}>
 							Account or password is incorrect
 						</div>:
 						<div class="contact100-form-checkbox">
@@ -87,11 +104,11 @@ const Login = () => {
 						}
 						
 
-						<div>
+						{/* <div>
 							<a href="#" class="txt1">
 								Forgot Password?
 							</a>
-						</div>
+						</div> */}
 					</div>
 			
 
@@ -123,4 +140,3 @@ const Login = () => {
 }
 
 export default Login
-
