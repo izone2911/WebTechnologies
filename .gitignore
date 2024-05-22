@@ -1,3 +1,3 @@
 /data
 **/node_modules
-/frontend/src/component
+# /frontend/src/component
