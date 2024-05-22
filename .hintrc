@@ -18,7 +18,8 @@
           "height: fit-content",
           "accent-color",
           "scale",
-          "-webkit-overflow-scrolling"
+          "-webkit-overflow-scrolling",
+          "-ms-filter"
         ]
       }
     ]

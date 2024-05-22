@@ -149,7 +149,7 @@ function MyCourse() {
                             
                             <div className="setting">
                                 <button className="setting-button"><i class="fas fa-cog"></i></button>
-                                {(acc.role == "lecturer") ? (
+                                {(acc.role === "lecturer") ? (
                                     <div className="dropDownSetting">
                                         <a onClick={()=>togglePopupAddStudent(index)}>Add student</a> <br />
                                         <a onClick={()=> toggleEditCourse(index)}>Edit</a> <br />
@@ -172,7 +172,7 @@ function MyCourse() {
                 <input type="text" placeholder="Nhập tên khóa học" onChange={(e)=> search_info = e.target.value}/>
                 <button onClick={() => searchCourse(search_info)}>Tìm kiếm</button>
               </div>
-              {(acc.role == "lecturer")? (
+              {(acc.role === "lecturer")? (
                     <button id="add-course" onClick={togglePopup}>Thêm khóa học</button>
               ): (null)}
               

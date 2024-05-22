@@ -49,7 +49,7 @@ const Login = () => {
 				setErrLogin(true)
 				return
 			} else {
-				login(inputs)
+				login(res.data[0])
 				navigate("/dashboard")
 			}
 		} catch (err) {
@@ -60,7 +60,7 @@ const Login = () => {
 	useEffect(() => {
         $('.input100').each(function(){
             $(this).on('blur', function(){
-                if($(this).val().trim() != "") {
+                if($(this).val().trim() !== "") {
                     $(this).addClass('has-val');
                 }
                 else {

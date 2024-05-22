@@ -8,7 +8,7 @@ function liveSearch({search_info ,courses}){
     console.log(search_info);
     for(var course of courses){
         var str = course.nameCourse.toLowerCase();
-        if(str.indexOf(search_info) != -1){
+        if(str.indexOf(search_info) !== -1){
             course_search.push(course);
         }
     }

@@ -11,7 +11,8 @@ export const AuthContexProvider = ({ children }) => {
   const login = async (inputs) => {
     const newInputs = {
       ...inputs,
-      user:inputs.email
+      user:inputs.email,
+      roleID:(inputs.role!=='Admin'?inputs.role==='Teacher'?2:3:1)
     }
     setCurrentUser(newInputs);
     console.log("login thanh cong",newInputs);
