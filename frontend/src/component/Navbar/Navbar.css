@@ -9,7 +9,7 @@
 }
 
 .navbar-mainbg {
-  background-color: #ffffff;
+  background-color: #fbfbfb;
   padding: 0px;
   border-bottom: 2px solid rgb(118, 118, 118);
   border-radius: 0 0 1% 1%;
@@ -44,7 +44,7 @@
   background-color: transparent;
   transition: all 0.7s;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 900;
 }
 #navbarSupportedContent a:not(:only-child):after {
   content: '\f105';
