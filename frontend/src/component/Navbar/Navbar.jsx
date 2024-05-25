@@ -7,7 +7,7 @@ import './dependencies/bootstrap/js/bootstrap.bundle.min';
 import './dependencies/fontawesome/css/all.css';
 import './dependencies/bootstrap/css/bootstrap.min.css';
 import './Navbar.css';
-
+import BookIcon from '@mui/icons-material/Book';
 import { AuthContext } from "../../context/authContext";
 
 const Navbar = () => {
@@ -30,7 +30,7 @@ const Navbar = () => {
       "top":itemPosNewAnimTop.top + "px", 
       "left":itemPosNewAnimLeft.left + "px",
       "height": activeWidthNewAnimHeight + "px",
-      "width": activeWidthNewAnimWidth + "px"
+      "width": activeWidthNewAnimWidth + "px",
     });
     $("#navbarSupportedContent").on("click","li",function(e){
       $('#navbarSupportedContent ul li').removeClass("active");
@@ -64,7 +64,8 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-mainbg">
 
       <NavLink className="navbar-brand navbar-logo" to="/" exact="true">
-        Thi trực tuyến
+        <BookIcon style={{marginRight: 5, marginTop: -4}}/>
+          Thi trực tuyến
       </NavLink>
     
       <button 
@@ -77,46 +78,80 @@ const Navbar = () => {
       </button>
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav ml-auto">
-            
+        <ul className="navbar-nav ml-auto" style={{width: '100%'}}>
             <div className="hori-selector">
-              <div className="left"></div>
-              <div className="right"></div>
             </div>
+
+            {/* -------------------------------------------------------------------------------- */}
+            <li className="nav-item" style={{pointerEvents:'none',visibility:'hidden'}}>
+              <NavLink className="nav-link" to="/" exact="true">
+                AAAAAAAAAAA
+              </NavLink> 
+            </li>
+            <li className="nav-item" style={{pointerEvents:'none',visibility:'hidden'}}>
+              <NavLink className="nav-link" to="/" exact="true">
+                AAAAAAAAAAA
+              </NavLink> 
+            </li>
+            <li className="nav-item" style={{pointerEvents:'none',visibility:'hidden'}}>
+              <NavLink className="nav-link" to="/" exact="true">
+                AAAAAAAAAAA
+              </NavLink> 
+            </li>
+            <li className="nav-item" style={{pointerEvents:'none',visibility:'hidden'}}>
+              <NavLink className="nav-link" to="/" exact="true">
+                AAAAAAAAAAA
+              </NavLink> 
+            </li>
+
+            {currentUser?
+            null:
+            <>
+              <li className="nav-item" style={{pointerEvents:'none',visibility:'hidden'}}>
+                <NavLink className="nav-link" to="/" exact="true">
+                  AAAAAAAAAAA
+                </NavLink> 
+              </li>
+              <li className="nav-item" style={{pointerEvents:'none',visibility:'hidden'}}>
+                <NavLink className="nav-link" to="/" exact="true">
+                  AAAAAAAAAAA
+                </NavLink> 
+              </li>
+            </>
+            }
+            {/* -------------------------------------------------------------------------------- */}
+
+            <li className="nav-item active" ref={coursesRef}>
+              <NavLink className="nav-link" to="/dashboard" exact="true">
+                Dashboard
+              </NavLink> 
+            </li>
             
             {currentUser?
               currentUser.RoleId === 1 ? 
               <li className="nav-item">
-                <NavLink className="nav-link" to="/dashboard" exact="true">
-                  Dashboard
+                <NavLink className="nav-link" to="/accman" exact="true">
+                  AccMan
                 </NavLink>
               </li> 
-            : <li className="nav-item">
-                <NavLink className="nav-link" to="/mycourse" exact="true">
+            :<>
+              <li className="nav-item">
+                <NavLink className="nav-link"  to="/mycourse" exact="true">
                   My Courses
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className="nav-link"  to="/blog" exact="true">
+                  Blog
+                </NavLink>
+              </li>
+            </>
             : null}
 
-            <li className="nav-item active" ref={coursesRef}>
-              <NavLink className="nav-link" to="/courses" exact="true">
-                Courses
-              </NavLink> 
-            </li>
-
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/blog" exact="true">
-                Blog
-              </NavLink>
-            </li>
-
-            <span>
-              <Link to=""></Link>
-            </span>
             {currentUser ? <>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/info" exact="true">
-                  {currentUser?.email}
+                  Profile
                 </NavLink>
               </li>
               <li className="nav-item">
