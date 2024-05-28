@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, Outlet }
   from "react-router-dom";
 //---------------------------------------------------------
 
-import { Login, Register, MyCourse, Course, Dashboard, Exam, Exercise} from "./pages";
+import { Login, Register, MyCourse, Course, Dashboard, Exam, Exercise, Blog} from "./pages";
 import Navbar from "./component/Navbar/Navbar.jsx";
 
 const Layout = () => {
@@ -26,7 +26,6 @@ function App() {
         <Route path="/mycourse" exact element={<MyCourse />} />
         <Route path="/course/:id" exact element={<Course />} />
         <Route path="/exam/:examID" exact element={<Exam />} />
-        <Route path="/exercise/:examID" exact element={<Exercise />} />
       </Routes>
     </Router>
     

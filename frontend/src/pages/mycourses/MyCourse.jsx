@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useContext, useState , useEffect} from "react";
 import axios from "axios";
-import liveSearch from "./LiveSearch";
 
 import './dependencies/css/style.css';
+import { AuthContext } from "../../context/authContext";
 
 function MyCourse() {
     const student_acc = {
@@ -12,13 +12,40 @@ function MyCourse() {
         role: "student"
     }; // fixed student account 
 
-    const teacher_acc = {
+    const teacher_acc1 = {
         email: "huyteach@gmail.com",
         name: "Thầy Huy",
         role: "lecturer"
-    }  // fixed teacher account
+    }  // fixed teacher account 1
 
-    const acc = teacher_acc;
+    const teacher_acc2 = {
+        email: "huylostteach@gmail.com",
+        name: "Thầy Huy Hà Thành",
+        role: "lecturer"
+    }  // fixed teacher account 2
+
+    const [acc, setAcc] = useState({});
+
+    // Get account
+    const { currentUser } = useContext(AuthContext);
+    console.log("email current : ");
+    console.log(currentUser.email);
+
+    useEffect(() => {
+        if (currentUser && currentUser.email) {
+            axios.post("http://localhost:4000/api/auth/login", { email: currentUser.email })
+                .then(result => {
+                    setAcc(result.data[0]);
+                    console.log("DUMB");
+                    console.log(acc);
+                })
+                .catch(err => console.log(err));
+        }
+    }, []);
+    
+    // console.log("Acc : ");
+    // console.log(acc);
+
     const [courses, setCourses] = useState([]);
 
     const [indexCourseChoice, setIndexCourseChoice] = useState();
@@ -122,21 +149,28 @@ function MyCourse() {
     }, []);
 
     // search course
+    const [search_info, setSearchInfor] = useState('');
+    console.log(search_info);
     const searchCourse = (search_info)=>{
-        setCourses(liveSearch({search_info, courses}));
+        console.log(search_info);
+        // setCourses(liveSearch({search_info, courses}));
     }
+    
 
     const CourseList = ({ courses }) => {
-        var search_info = "an toàn";
-
         return (
-          <div className="container">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></link>
-
             <div className="course-list-container">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></link>
                 <h1 style={{marginBottom: "20px"}}>Khóa học của tôi</h1>
                 <ul className="course-list">
-                {courses.map((course, index) => (
+                {courses.filter((course)=>{
+                    var search_lower = search_info.toLowerCase();
+                    if(course.nameCourse.toLowerCase().indexOf(search_lower) != -1
+                    || course.maHP.toLowerCase().indexOf(search_lower) != -1
+                    || course.maLop.toLowerCase().indexOf(search_lower) != -1){
+                        return course;
+                    }
+                }).map((course, index) => (
                     <li key={index} className="course-item">
                         <img src={course.img} alt="" className="logo"/>
                         <div className="course-info">
@@ -318,7 +352,21 @@ function MyCourse() {
             {addCoursePopUp && popup_addCourse}
             {addStudentPopUp && popup_addStudent}
             {editCoursePopUp && popup_editCourse(indexCourseChoice)}
-            <CourseList courses={courses} />
+            <div className="container">
+                <CourseList courses={courses} />
+                <div className="controller">
+                    <div className="search-course">
+                        <h2>Tìm trong khóa học của tôi</h2>
+                        <input type="text" className="my-3" placeholder="Nhập tên khóa học" onChange={(e)=> setSearchInfor(e.target.value)}/>
+                        <button onClick={() => searchCourse(search_info)}>Tìm kiếm</button>
+                    </div>
+                    {(acc.role == "lecturer")? (
+                            <button id="add-course" onClick={togglePopup}>Thêm khóa học</button>
+                    ): (null)}
+                    
+                </div>
+            </div>
+            
         </div>
     )
 }

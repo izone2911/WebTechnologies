@@ -38,6 +38,10 @@ app.use("/api/scoreExercise",ScoreExerciseRoutes)
 import MyCourseRoutes from "./routes/MyCourse.js";
 app.use("/api/mycourse", MyCourseRoutes);
 
+///////////////////////////////////////////////////////////////////
+import BlogRoute from "./routes/Blog.js";
+app.use("api/blog", BlogRoute);
+
 app.get('*', (req, res) => res.send('404 NOT FOUND!!!'));
 
 app.listen(4000,() => {
