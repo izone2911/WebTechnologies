@@ -4,7 +4,7 @@ import axios from "axios";
 
 import './dependencies/css/style.css';
 
-function Blog() {
+function HomePage() {
     return(
         <div>
             Blog
@@ -12,4 +12,4 @@ function Blog() {
     )
 }
 
-export default Blog;
+export default HomePage;
