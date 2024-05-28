@@ -26,7 +26,6 @@ function Dashboard() {
         axios.post("http://localhost:4000/api/mycourse/getallcourse")
         .then(result =>{
             setCourses(result.data.courses);
-            console.log(result.data);
         })
         .catch(err => console.log(err));
     }, []);

@@ -5,6 +5,7 @@ import axios from "axios"
 import './dependencies/css/style.css';
 
 function Course() {
+    const navigate = useNavigate();
     const student_acc = {
         email: "huydz@gmail.com",
         name: "Lê Đức Huy",
@@ -74,8 +75,6 @@ function Course() {
             setCourse(result.data.course[0]);
             setExams(result.data.exams);
             setExercises(result.data.exercises);
-            console.log(result.data[0]);
-            console.log(course);
         })
         .catch(err => console.log(err));
     }, []);
@@ -98,7 +97,7 @@ function Course() {
                             <p>{"Số câu hỏi: " + quiz.numQuestion}</p>
                             <p>{"Điểm: " + quiz.score}</p>
 
-                            <button className="setting-button">Vào thi</button>
+                            <button className="setting-button" onClick={(e) => {navigate('/exercise/'+quiz.exerciseID)}}>Vào thi</button>
                             <div className="setting">
                                 <button className="setting-button"><i class="fas fa-cog"></i></button>
                                 {(acc.role == "lecturer") ? (
@@ -122,9 +121,9 @@ function Course() {
                                 <p>{"Số câu hỏi: " + exam.numQuestion}</p>
                                 <p>{"Điểm: " + exam.score}</p>
     
-                                <button className="setting-button">Vào thi</button>
+                                <button className="setting-button" onClick={(e) => {navigate('/exam/'+exam.examID)}}>Vào thi</button>
                                 <div className="setting">
-                                    <button className="setting-button"><i class="fas fa-cog"></i></button>
+                                    <button className="setting-button" ><i class="fas fa-cog"></i></button>
                                     {(acc.role == "lecturer") ? (
                                         <div className="dropDownSetting">
                                             <a >Edit</a> <br />

@@ -7,6 +7,7 @@ export const getMyCourse = async (req,res)=>{
 
     try {
         const blog = await CourseAccountModel.find({email})
+        console.log("EMAIL",req.body,blog)
         res.json(blog)
     } catch(err) {
         res.status(500).json({

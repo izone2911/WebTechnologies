@@ -119,6 +119,14 @@ const Navbar = () => {
               </li>
             </>
             }
+
+            {currentUser?currentUser.roleID===1?
+            <li className="nav-item" style={{pointerEvents:'none',visibility:'hidden'}}>
+              <NavLink className="nav-link" to="/" exact="true">
+              AAAAA
+              </NavLink> 
+            </li>:null:null}
+
             {/* -------------------------------------------------------------------------------- */}
 
             <li className="nav-item active" ref={coursesRef}>
@@ -128,7 +136,7 @@ const Navbar = () => {
             </li>
             
             {currentUser?
-              currentUser.RoleId === 1 ? 
+              currentUser.roleID === 1 ? 
               <li className="nav-item">
                 <NavLink className="nav-link" to="/accman" exact="true">
                   AccMan
