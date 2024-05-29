@@ -27,8 +27,11 @@ export const createBlog = async (req, res) => {
 // READ
 export const getFeedBlog = async (req, res) => {
     try {
-        const post = await BlogModel.find();
-        res.status(200).json(post);
+        // const post = await BlogModel.find();
+        res.status(200).json({
+            name: "huy",
+            name2: "bruh"
+        });
     } catch (error) {
         res.status(404).json({message: error.message});
     }

@@ -24,24 +24,24 @@ function MyCourse() {
         role: "lecturer"
     }  // fixed teacher account 2
 
-    const [acc, setAcc] = useState({});
+    const [acc, setAcc] = useState(teacher_acc1);
 
     // Get account
-    const { currentUser } = useContext(AuthContext);
-    console.log("email current : ");
-    console.log(currentUser.email);
+    // const { currentUser } = useContext(AuthContext);
+    // console.log("email current : ");
+    // console.log(currentUser.email);
 
-    useEffect(() => {
-        if (currentUser && currentUser.email) {
-            axios.post("http://localhost:4000/api/auth/login", { email: currentUser.email })
-                .then(result => {
-                    setAcc(result.data[0]);
-                    console.log("DUMB");
-                    console.log(acc);
-                })
-                .catch(err => console.log(err));
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (currentUser && currentUser.email) {
+    //         axios.post("http://localhost:4000/api/auth/login", { email: currentUser.email })
+    //             .then(result => {
+    //                 setAcc(result.data[0]);
+    //                 console.log("DUMB");
+    //                 console.log(acc);
+    //             })
+    //             .catch(err => console.log(err));
+    //     }
+    // }, []);
     
     // console.log("Acc : ");
     // console.log(acc);
