@@ -114,7 +114,7 @@
   }
   .hori-selector {
     margin-top: 0px;
-    margin-left: 10px;
+    margin-left: 0px;
     border-radius: 0;
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
@@ -137,5 +137,8 @@
   .hori-selector .right:before {
     bottom: -25px;
     left: -25px;
+  }
+  .nav-hidden {
+    display: none;
   }
 }

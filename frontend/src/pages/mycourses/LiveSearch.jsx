@@ -4,8 +4,6 @@ import React, { useContext, useState , useEffect} from "react";
 function liveSearch({search_info ,courses}){
     var course_search = [];
     search_info = search_info.toLowerCase();
-    console.log("DUmb");
-    console.log(search_info);
     for(var course of courses){
         var str = course.nameCourse.toLowerCase();
         if(str.indexOf(search_info) !== -1){

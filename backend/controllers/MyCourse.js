@@ -7,7 +7,6 @@ export const getMyCourse = async (req,res)=>{
 
     try {
         const blog = await CourseAccountModel.find({email})
-        console.log("EMAIL",req.body,blog)
         res.json(blog)
     } catch(err) {
         res.status(500).json({
@@ -52,7 +51,7 @@ export const addNewCourse = async (req,res) => {
         const blog = await CourseModel.create(req.body);
         const tmp = {
             email: blog.emailAuthor,
-            role: "lecturer",
+            role: "Teacher",
             maHP: blog.maHP,
             kiHoc: blog.kiHoc,
             maLop: blog.maLop,
@@ -79,7 +78,7 @@ export const addStudent = async (req,res) => {
         const email_student = req.body.student;
         const tmp = {
             email: email_student,
-            role: "student",
+            role: "Student",
             maHP: blog.maHP,
             kiHoc: blog.kiHoc,
             maLop: blog.maLop,

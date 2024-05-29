@@ -19,3 +19,12 @@
     margin-bottom: 20px;
     padding: 10px;
 }
+
+.dropDownSetting a{
+    background-color: rgb(219, 228, 243);
+}
+
+.dropDownSetting a:hover{
+    background-color: lightblue;
+    font-weight: 800;
+}

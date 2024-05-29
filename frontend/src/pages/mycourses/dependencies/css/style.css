@@ -46,28 +46,25 @@ a{
     margin: 5px 0;
 }
 
-.setting-button{
-}
-
 
 /* Controller */
 
 .controller {
     /* margin-left: 30px; */
     padding-left: 30px;
-    width: 300px;
+    width: 35%;
 }
 
 .search-course input[type="text"] {
     width: 100%;
     padding: 5px;
-    margin-bottom: 10px;
+    margin: 0px;
 }
 
 button {
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #2a7cd5;
     color: #fff;
     border: none;
     border-radius: 20px;
@@ -79,25 +76,29 @@ button:hover {
 }
 
 #add-course{
-    margin-top: 50px;
+    margin-top: 10px;
 }
 
 .dropDownSetting{
     display: none;
     position: absolute;
     background-color: white;
-    min-width: 150px;
+    min-width: 100px;
 }
 
 .dropDownSetting a{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
     color: black;
-    padding: 11px 15px;
+    padding: 11px 15px ;
     text-decoration: none;
     display: block;
+    background-color: rgb(219, 228, 243);
 }
 
 .dropDownSetting a:hover{
     background-color: lightblue;
+    font-weight: 800;
 }
 
 .setting:hover .dropDownSetting{

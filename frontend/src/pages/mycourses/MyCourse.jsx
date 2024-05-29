@@ -49,8 +49,6 @@ function MyCourse() {
         // console.log(newCourse);
         try {
 			const res = await axios.post("http://localhost:4000/api/mycourse/addnewcourse", newCourse);
-			console.log(res.data);
-			console.log("Add new course successfull");
             courses.unshift(newCourse);
             togglePopup(); // close popup
 		} catch (err) {
@@ -77,8 +75,6 @@ function MyCourse() {
             const course = courses[indexCourseChoice];
             console.log(course);
             const res = await axios.post("http://localhost:4000/api/mycourse/addstudent", {student: addedStudent, course: course});
-            console.log(res.data);
-            console.log("Add student successfull");
             togglePopupAddStudent();
         } catch (error) {
             console.log(error);
@@ -96,7 +92,6 @@ function MyCourse() {
 
     const handleEditCourse = async(index, course)=>{
         const res = await axios.post("http://localhost:4000/api/mycourse/updatecourse", {course: course});
-        console.log(res.data);
         courses[index] = course; 
         toggleEditCourse(course);
 
@@ -106,17 +101,14 @@ function MyCourse() {
     const handleDeleteCourse = async(index)=>{
         setIndexCourseChoice(index);
         const course = courses[index];
-        console.log("Delete " + course.nameCourse);
         courses.splice(index, 1);
         const res = await axios.post("http://localhost:4000/api/mycourse/deletecourse", {course: course});
-        console.log(res.data);
     }
     
     // display courses
 
     // get courses of acc from server
     useEffect(()=>{
-        console.log("EMAIL",currentUser)
         axios.post("http://localhost:4000/api/mycourse/getmycourse", {email: currentUser.email})
         .then(result =>{
             setCourses(result.data);
@@ -126,7 +118,6 @@ function MyCourse() {
 
     // search course
     const [search_info, setSearchInfor] = useState('');
-    console.log(search_info);
     const searchCourse = (search_info)=>{
         console.log(search_info);
     }
@@ -136,7 +127,7 @@ function MyCourse() {
         return (
             <div className="course-list-container">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></link>
-                <h1 style={{marginBottom: "20px"}}>Khóa học của tôi</h1>
+                <h1 style={{marginBottom: "20px",marginTop: "10px"}}>Khóa học của tôi</h1>
                 <ul className="course-list">
                 {courses.filter((course)=>{
                     var search_lower = search_info.toLowerCase();
@@ -150,23 +141,23 @@ function MyCourse() {
                         <img src={course.img} alt="" className="logo"/>
                         <div className="course-info">
                             <h2>{course.nameCourse}</h2>
-                            <p><strong>Mã học phần:</strong> {course.maHP}</p>
-                            <p><strong>Giảng viên:</strong> {course.author}</p>
-                            <p><strong>Kỳ học:</strong> {course.kiHoc}</p>
+                            <p style={{fontFamily:"Verdana"}}><strong>Mã học phần:</strong> {course.maHP}</p>
+                            <p style={{fontFamily:"Verdana"}}><strong>Giảng viên:</strong> {course.author}</p>
+                            <p style={{fontFamily:"Verdana"}}><strong>Kỳ học:</strong> {course.kiHoc}</p>
 
-                            <button onClick={()=> handleSwitchToCourse(course)}>Tiếp tục học</button>
+                            <button style={{borderRadius:"15px"}} onClick={()=> handleSwitchToCourse(course)}>Tiếp tục học</button>
                             
-                            <div className="setting">
-                                <button className="setting-button"><i class="fas fa-cog"></i></button>
-                                {(acc.role == "Teacher") ? (
+                            <div className="setting" >
+                                <button style={{borderRadius:"15px"}} className="setting-button"><i class="fas fa-cog"></i></button>
+                                {(acc.role === "Teacher") ? (
                                     <div className="dropDownSetting">
-                                        <a onClick={()=>togglePopupAddStudent(index)}>Add student</a> <br />
-                                        <a onClick={()=> toggleEditCourse(index)}>Edit</a> <br />
-                                        <a onClick={()=> handleDeleteCourse(index)}>Delete</a>
+                                        <a style={{borderRadius:"15px 15px 0px 0px"}} onClick={()=>togglePopupAddStudent(index)}>Add student</a>
+                                        <a onClick={()=> toggleEditCourse(index)}>Edit</a>
+                                        <a style={{borderRadius:"0px 0px 15px 15px"}} onClick={()=> handleDeleteCourse(index)}>Delete</a>
                                     </div>
                                 ) : (
                                     <div className="dropDownSetting">
-                                        <a href="" onClick="">Hủy ghi danh</a>
+                                        <a style={{borderRadius:"15px 15px 15px 15px"}} onClick="">Hủy ghi danh</a>
                                     </div>
                                 )}
                             </div>
@@ -187,25 +178,25 @@ function MyCourse() {
 
                         <div className="mb-2">
                             <label htmlFor="">Mã học phần</label>
-                            <input type="text" className="form-control"
+                            <input type="text" className="form-control" required
                             onChange={(e)=> newCourse.maHP = e.target.value}/>
                         </div>
 
                         <div className="mb-2">
                             <label htmlFor="">Kỳ học</label>
-                            <input type="text" className="form-control"
+                            <input type="text" className="form-control" required
                             onChange={(e)=> newCourse.kiHoc = e.target.value}/>
                         </div>
 
                         <div className="mb-2">
                             <label htmlFor="">Mã lớp</label>
-                            <input type="text" className="form-control"
+                            <input type="text" className="form-control" required
                             onChange={(e)=> newCourse.maLop = e.target.value}/>
                         </div>
 
                         <div className="mb-2">
                             <label htmlFor="">Tên môn học</label>
-                            <input type="text"  className="form-control"
+                            <input type="text"  className="form-control" required
                             onChange={(e)=> newCourse.nameCourse = e.target.value}/>
                         </div>
 
@@ -223,12 +214,11 @@ function MyCourse() {
 
                         <div className="mb-2">
                             <label htmlFor="">Ngày kết thúc</label>
-                            <input type="date"  className="form-control"
+                            <input type="date"  className="form-control" required
                             onChange={(e)=> newCourse.deleteAt = e.target.value}/>
                         </div>
-
-                        <button className="btn btn-success" onClick={handleAddNewCourse}>Submit</button>
-                        <button className="btn btn-danger" onClick={togglePopup}>Close</button>
+                        <button className="btn btn-success" style={{marginRight:"1px"}}  onClick={handleAddNewCourse}>Submit</button>
+                        <button className="btn btn-danger" onClick={togglePopup}>Cancel</button>
                     </div>
                 </div>
             </div>
@@ -243,7 +233,7 @@ function MyCourse() {
                             <input type="email" className="form-control"
                             onChange={(e)=> addedStudent = e.target.value}/>
                         </div>
-                    <button className="btn btn-success" onClick={handleAddStudent}>Submit</button>
+                    <button className="btn btn-success" style={{marginRight:"1px"}} onClick={handleAddStudent}>Submit</button>
                     <button className="btn btn-danger" onClick={togglePopupAddStudent}>Cancel</button>
                 </div>
             </div>
@@ -302,7 +292,7 @@ function MyCourse() {
                             onChange={(e)=> course.deleteAt = e.target.value}/>
                         </div>
 
-                        <button className="btn btn-success" onClick={(e)=>handleEditCourse(index, course)}>Submit</button>
+                        <button className="btn btn-success" style={{marginRight:"1px"}} onClick={(e)=>handleEditCourse(index, course)}>Save</button>
                         <button className="btn btn-danger" onClick={toggleEditCourse}>Close</button>
                     </div>
                 </div>
@@ -319,12 +309,12 @@ function MyCourse() {
                 <CourseList courses={courses} />
                 <div className="controller">
                     <div className="search-course">
-                        <h2>Tìm trong khóa học của tôi</h2>
-                        <input type="text" className="my-3" placeholder="Nhập tên khóa học" onChange={(e)=> setSearchInfor(e.target.value)}/>
-                        <button onClick={() => searchCourse(search_info)}>Tìm kiếm</button>
+                        <h2 style={{marginTop:"10px",fontSize:"27px"}}>Tìm trong khóa học của tôi</h2>
+                        <input type="text" style={{marginBottom:"0px",marginTop:"10px"}} className="my-3" placeholder="Nhập tên khóa học" onChange={(e)=> setSearchInfor(e.target.value)}/>
+                        <button style={{borderRadius:"15px"}} onClick={() => searchCourse(search_info)}>Tìm kiếm</button>
                     </div>
                     {(acc.role == "Teacher")? (
-                            <button id="add-course" onClick={togglePopup}>Thêm khóa học</button>
+                            <button id="add-course" style={{borderRadius:"15px"}} onClick={togglePopup}>Thêm khóa học</button>
                     ): (null)}
                     
                 </div>

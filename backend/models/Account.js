@@ -5,11 +5,10 @@ const accountSchema = new Schema({
     email: String,
     password: String,
     name: String,
-    role: String,
-    birthday: Date,
-    address: String,
-    phoneNumber: String,
-    avatar: String,
+    avatar: {
+        type: String,
+        default: "https://w7.pngwing.com/pngs/205/731/png-transparent-default-avatar-thumbnail.png"
+    },
     createAt: {
         type: Date,
         default: Date.now,

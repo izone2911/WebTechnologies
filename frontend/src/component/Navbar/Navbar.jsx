@@ -70,6 +70,7 @@ const Navbar = () => {
     
       <button 
         className="navbar-toggler"
+        style={{backgroundColor:"#585858"}}
         onClick={ function(){
           setTimeout(function(){ animation(); });
         }}
@@ -83,22 +84,22 @@ const Navbar = () => {
             </div>
 
             {/* -------------------------------------------------------------------------------- */}
-            <li className="nav-item" style={{pointerEvents:'none',visibility:'hidden'}}>
+            <li className="nav-hidden" style={{pointerEvents:'none',visibility:'hidden'}}>
               <NavLink className="nav-link" to="/" exact="true">
                 AAAAAAAAAAA
               </NavLink> 
             </li>
-            <li className="nav-item" style={{pointerEvents:'none',visibility:'hidden'}}>
+            <li className="nav-hidden" style={{pointerEvents:'none',visibility:'hidden'}}>
               <NavLink className="nav-link" to="/" exact="true">
                 AAAAAAAAAAA
               </NavLink> 
             </li>
-            <li className="nav-item" style={{pointerEvents:'none',visibility:'hidden'}}>
+            <li className="nav-hidden" style={{pointerEvents:'none',visibility:'hidden'}}>
               <NavLink className="nav-link" to="/" exact="true">
                 AAAAAAAAAAA
               </NavLink> 
             </li>
-            <li className="nav-item" style={{pointerEvents:'none',visibility:'hidden'}}>
+            <li className="nav-hidden" style={{pointerEvents:'none',visibility:'hidden'}}>
               <NavLink className="nav-link" to="/" exact="true">
                 AAAAAAAAAAA
               </NavLink> 
@@ -107,12 +108,12 @@ const Navbar = () => {
             {currentUser?
             null:
             <>
-              <li className="nav-item" style={{pointerEvents:'none',visibility:'hidden'}}>
+              <li className="nav-hidden" style={{pointerEvents:'none',visibility:'hidden'}}>
                 <NavLink className="nav-link" to="/" exact="true">
                   AAAAAAAAAAA
                 </NavLink> 
               </li>
-              <li className="nav-item" style={{pointerEvents:'none',visibility:'hidden'}}>
+              <li className="nav-hidden" style={{pointerEvents:'none',visibility:'hidden'}}>
                 <NavLink className="nav-link" to="/" exact="true">
                   AAAAAAAAAAA
                 </NavLink> 
@@ -121,7 +122,7 @@ const Navbar = () => {
             }
 
             {currentUser?currentUser.roleID===1?
-            <li className="nav-item" style={{pointerEvents:'none',visibility:'hidden'}}>
+            <li className="nav-hidden" style={{pointerEvents:'none',visibility:'hidden'}}>
               <NavLink className="nav-link" to="/" exact="true">
               AAAAA
               </NavLink> 
