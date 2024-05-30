@@ -1,6 +1,8 @@
 import { CourseModel } from "../models/Course.js";
 import { CourseAccountModel } from "../models/Course.js";
 import { ExamModel, ExerciseModel } from "../models/Exam.js";
+import { ExamAccountModel } from "../models/ExamAccount.js";
+import { ExerciseAccountModel } from "../models/ExerciseAccount.js";
 
 export const getMyCourse = async (req,res)=>{
     const {email} = req.body;

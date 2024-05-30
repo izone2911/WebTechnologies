@@ -164,7 +164,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink onClick={handleLogout} className="nav-link" to="/courses" exact="true">
+                <NavLink onClick={handleLogout} className="nav-link" to="/course" exact="true">
                   Logout
                 </NavLink>
               </li>

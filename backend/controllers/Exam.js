@@ -21,6 +21,9 @@ export const getExam = async (req,res) => {
             let dataExamAccount = {}
             dataExamAccount.examID      = dataExam[0].examID
             dataExamAccount.userID      = req.body.userID
+            dataExamAccount.maHP        = dataExam[0].maHP
+            dataExamAccount.kiHoc       = dataExam[0].kiHoc
+            dataExamAccount.maLop       = dataExam[0].maLop
             dataExamAccount.title       = dataExam[0].title
             dataExamAccount.questions   = dataExam[0].questions
             dataExamAccount.answers     = dataExam[0].answers

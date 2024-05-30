@@ -11,6 +11,9 @@ const examAccountSchema = new Schema({
     userAnswers: Object,
     questions: Object,
     answers: Object,
+    numTrue: Number,
+    numQues: Number,
+    score: Number,
     createAt: {
         type: Date,
         default: Date.now,
