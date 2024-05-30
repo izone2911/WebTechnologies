@@ -1,0 +1,49 @@
+/* src/components/Profile.css */
+.profile-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.infor{
+  display: flex;
+  flex-direction: column;
+}
+
+.choice-button{
+  display: flex;
+  margin-top: 10px;
+}
+
+.choice-button button{
+  margin-right: auto;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.input {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #218838;
+}

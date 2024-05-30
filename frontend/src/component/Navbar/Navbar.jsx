@@ -150,7 +150,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link"  to="/blog" exact="true">
+                <NavLink className="nav-link"  to="/homepage" exact="true">
                   Blog
                 </NavLink>
               </li>
