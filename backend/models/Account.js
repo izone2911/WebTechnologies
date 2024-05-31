@@ -9,6 +9,11 @@ const accountSchema = new Schema({
         type: String,
         default: "https://w7.pngwing.com/pngs/205/731/png-transparent-default-avatar-thumbnail.png"
     },
+    gender: {
+        type: String
+    },
+    birthDay: Date,
+    phone: String,
     createAt: {
         type: Date,
         default: Date.now,

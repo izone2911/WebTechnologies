@@ -3,14 +3,18 @@ import { AccountModel } from "../models/Account.js";
 
 export const createBlog = async (req, res) => {
     try {
-        const {userId, description, picturePath} = req.body;
-        const user = await AccountModel.findById(userId);
+        console.log(req.body.data);
+        const {email, title, description, picturePath} = req.body.data;
+        console.log("Email : ", email);
+
+        const user = await AccountModel.findOne({email});
+        console.log(user.name);
         const newPost = new BlogModel({
             email,
-            name: user.firstName,
-            lastName: user.lastName,
-            description,
+            userName: user.name,
             userAvatar: user.avatar,
+            title,
+            description,
             picturePath,
             likes: {},
             comments: []

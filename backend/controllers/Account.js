@@ -23,6 +23,23 @@ export const createAccount = async (req,res) => {
     }
 }
 
+export const updateAccount = async (req,res) => {
+    try {
+        console.log(req.body);
+        const blog = req.body.acc;
+        const {email, password, name, gender, birthDay, avatar, phone} = blog;
+        const updateacc = await AccountModel.updateOne({email}, {$set: {password, name, gender, birthDay, avatar, phone}});
+        res.json({
+            message: "Update account successfull",
+            // res: updateacc
+        })
+    } catch(err) {
+        res.status(500).json({
+            error: err.message
+        })
+    }
+}
+
 export const logOut = (req, res) => {
     res
       .clearCookie("access_token", {

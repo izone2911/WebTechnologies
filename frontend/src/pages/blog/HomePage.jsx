@@ -5,38 +5,36 @@ import axios from "axios";
 import './dependencies/css/style.css';
 import BlogList from "./components/BlogList.js";
 import CreateBlog from './components/CreateBlog.js';
+import { AuthContext } from "../../context/authContext.js";
 
 function HomePage(){
-    const [acc, setAcc] = useState({
-        email: "huyteach@gmail.com",
-        name: "Thầy Huy",
-        role: "lecturer"
-    });
+    const {currentUser} = useContext(AuthContext);
+    const [acc, setAcc] = useState(currentUser);
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
-    const fetchBlogs = async () => {
-        try {
-        const response = await axios.post("http://localhost:4000/api/blog/getfeedblog", {email: acc.email})
-        setBlogs(response.data);
-        console.log(response);
-        } catch (error) {
-        console.error('Error fetching blogs', error);
-        }
-    };
+        const fetchBlogs = async () => {
+            try {
+            const response = await axios.post("http://localhost:4000/api/blog/getfeedblog", {email: acc.email})
+            setBlogs(response.data);
+            console.log(response);
+            } catch (error) {
+            console.error('Error fetching blogs', error);
+            }
+        };
 
-    fetchBlogs();
+        fetchBlogs();
     }, []);
 
     const handleBlogCreated = (newBlog) => {
-    setBlogs([newBlog, ...blogs]);
+        setBlogs([newBlog, ...blogs]);
     };
 
     return (
-    <div className="container">
+    <div className="container3">
         <h1>Blog Forum</h1>
-        {/* <CreateBlog onBlogCreated={handleBlogCreated} /> */}
-        {/* <BlogList blogs={blogs} /> */}
+        <BlogList blogs={blogs} />
+        <CreateBlog onBlogCreated={handleBlogCreated} /> 
     </div>
     );
 };

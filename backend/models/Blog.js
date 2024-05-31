@@ -6,13 +6,14 @@ const BlogSchema = new Schema({
         type: String,
         required: true,
     },
-    name:{
+    userName:{
         type: String,
         required: true,
     },
+    userAvatar: String,
+    title: String,
     description: String,
     picturePath: String,
-    userAvatar: String,
     likes:{
         type: Map,
         of: Boolean

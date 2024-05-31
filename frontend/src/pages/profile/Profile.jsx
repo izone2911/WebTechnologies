@@ -9,29 +9,15 @@ import { AuthContext } from "../../context/authContext";
 const Profile = () => {
   
     // Get account
-    // const { currentUser } = useContext(AuthContext);
-    // const currentUser = {
-    //   name: 'Nguyen Van A',
-    //   role: 'Học sinh',
-    //   email: 'huydz@gmail.com',
-    //   password: '123abcdef',  
-    //   avatar: 'https://w7.pngwing.com/pngs/205/731/png-transparent-default-avatar-thumbnail.png',
-    // }
+    const { currentUser, logout } = useContext(AuthContext);
     // console.log(currentUser);
 
-    const [profile, setProfile] = useState({
-      name: 'Nguyen Van A',
-      role: 'Học sinh',
-      email: 'huydz@gmail.com',
-      password: '123abcdef',  
-      avatar: 'https://w7.pngwing.com/pngs/205/731/png-transparent-default-avatar-thumbnail.png',
-    });
+    const [profile, setProfile] = useState(currentUser);
+
+    const [editMode, setEditMode] = useState(false);
 
     const [tempProfile, setTempProfile] = useState({ ...profile });
-    console.log("prf : ");
-    console.log(tempProfile);
-  
-    const [editMode, setEditMode] = useState(false);
+    
     const [showPassword, setShowPassword] = useState(false);
     const [showRetypePassword, setShowRetypePassword] = useState(false);
     const [editPassword, setEditPassword] = useState(false);
@@ -42,55 +28,81 @@ const Profile = () => {
   
     const handleInputChange = (e) => {
       const { name, value } = e.target;
-      console.log("Stellar");
-      console.log(name);
-      console.log(value);
       setTempProfile({ ...tempProfile, [name]: value });
     };
   
     const handleSave = () => { 
       console.log("temp");
       console.log(tempProfile);
-      if(tempProfile.password !== tempProfile.retype_password){
+      if(tempProfile.password !== tempProfile.retype_password && editPassword == true){
         setWarning(true);
         setWarningMessage("Nhập lại mật khẩu sai!")
       }  
       else{
-        // setProfile({ ...tempProfile });
+        setProfile({ ...tempProfile });
         setEditMode(false);
+        console.log("Current in4 : ");
+        console.log(tempProfile);
+
+        // Lưu thông tin vào server nếu cần thiết
+        axios.post('http://localhost:4000/api/auth/updateaccount', {acc: tempProfile})
+             .then(response => console.log(response.data))
+             .catch(error => console.log(error));
       }
-      
-      // Lưu thông tin vào server nếu cần thiết
-      // axios.post('/api/profile', tempProfile)
-      //      .then(response => console.log(response.data))
-      //      .catch(error => console.log(error));
     };
+    
+    const navigate = useNavigate();
+    const handleLogOut = () => {
+      console.log("Log out");
+      logout();
+      navigate('/dashboard');
+    }
 
     const enableEditPassword = () =>{
         setEditPassword(true);
     }
+
+    // set avatar
+    const handleAvatarChange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setTempProfile({ ...tempProfile, avatar: reader.result });
+        };
+        reader.readAsDataURL(file);
+      }
+    };
   
     return (
       <div className="profile-container">
-        <img src={tempProfile.avatar} alt="Avatar" className="profile-image" />
+        <img src={tempProfile.avatar} alt="Avatar" className="profile-image" 
+        onClick={() => document.getElementById('avatarInput').click()
+        
+        }/>
+        <input type="file"
+          id="avatarInput"
+          style={{display: 'none'}}
+          onChange={handleAvatarChange}
+        />
+        
         {editMode ? (
           <div className="infor">
-            <label htmlFor="fullName">Họ và tên</label>
+            <label htmlFor="name">Họ và tên</label>
             <input
               type="text"
-              name="fullName"
+              name="name"
               defaultValue={tempProfile.name}
               onChange={handleInputChange}
               className="input"
               placeholder="Họ và tên"
             />
 
-            <label htmlFor="role">Tài khoản này của</label>
+            <label htmlFor="role">Vai trò</label>
             <input
               type="text"
               name="role"
               defaultValue={tempProfile.role}
-              onChange={handleInputChange}
               className="input"
               readOnly
             />
@@ -101,7 +113,37 @@ const Profile = () => {
               name="email"
               defaultValue={tempProfile.email}
               className="input"
+              readOnly
             />
+
+            <label htmlFor="phone">SĐT</label>
+            <input
+              type="tel"
+              name="phone"
+              onChange={handleInputChange}
+              defaultValue={tempProfile.phone}
+              className="input"
+            />
+
+            <label htmlFor="birthDay">Ngày sinh</label>
+            <input
+              type="date"
+              name="birthDay"
+              onChange={handleInputChange}
+              defaultValue={tempProfile.birthDay}
+              className="input"
+            />
+
+          <label htmlFor="gender">Giới tính</label>
+          <select
+            name="gender"
+            value={tempProfile.gender}
+            onChange={handleInputChange}
+            className="input"
+          >
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
+          </select>
 
             <label htmlFor="password">Mật khẩu</label>
             {!editPassword ? (
@@ -146,15 +188,15 @@ const Profile = () => {
             <div className="choice-button">
               <button onClick={handleSave} className="btn btn-success">Save</button>
               <button onClick={()=>setEditMode(false)} className="btn btn-danger">Cancel</button>
-              <button  className="btn btn-danger">Log out</button>
+              <button onClick={handleLogOut} className="btn btn-danger">Log out</button>
             </div>
 
             {warning ? (<p style={{color: "red"}}>{warningMessage}</p>) : (null)}
           </div>
         ) : (
           <>
-            <h2>{tempProfile.name}</h2>
-            <p>{tempProfile.role}</p>
+            <h2>{profile.name}</h2>
+            <p>{profile.role}</p>
             <button onClick={() => setEditMode(true)} className="button-setting">Edit Profile</button>
           </>
         )}

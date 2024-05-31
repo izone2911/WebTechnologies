@@ -6,10 +6,10 @@ const LikeButton = ({ blogId }) => {
 
   const handleLike = async () => {
     try {
-      await axios.post(`/api/blogs/${blogId}/like`);
+      await axios.post(`http://localhost:4000/api/blog/${blogId}/like`);
       setLikes(likes + 1);
     } catch (error) {
-      console.error('Error liking blog', error);
+      console.error('Error when like blog', error);
     }
   };
 
