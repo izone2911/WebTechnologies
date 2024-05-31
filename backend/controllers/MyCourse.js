@@ -23,9 +23,39 @@ export const getCourse = async (req, res) => {
         const course = await CourseModel.find({maLop});
         const exams = await ExamModel.find({maLop});
         const exercises = await ExerciseModel.find({maLop});
+        const examAccounts = await ExamAccountModel.find({maLop,userID: req.body.userID})
+        const exerciseAccounts = await ExerciseAccountModel.find({maLop,userID: req.body.userID})
+        console.log(exams)
+        const newExams = exams.map((examItem) => {
+            let newItems = {}
+            newItems.examID      = examItem.examID
+            newItems.maHP        = examItem.maHP
+            newItems.kiHoc       = examItem.kiHoc
+            newItems.maLop       = examItem.maLop
+            newItems.title       = examItem.title
+            newItems.numQuestion = examItem.questions.questions.length
+            for(let i=0;i<examAccounts.length;i++){
+                let examAccountItem = examAccounts[i]
+                if(examItem.examID === examAccountItem.examID){
+                    if(examAccountItem?.numQues){
+                        newItems.numTrue = examAccountItem.numTrue
+                        newItems.numQues = examAccountItem.numQues
+                        newItems.score   = examAccountItem.score
+                    } else {
+                        newItems.numTrue = -100
+                        newItems.numQues = -100
+                        newItems.score   = -100
+                    }
+                }
+            }
+
+            return newItems
+        })
+
+        console.log("newExams",newExams)
         res.json({
             course: course,
-            exams: exams,
+            exams: newExams,
             exercises: exercises
         });
     } catch(err) {

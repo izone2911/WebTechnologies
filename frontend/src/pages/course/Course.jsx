@@ -60,7 +60,7 @@ function Course() {
     const maLop = useParams();
 
     useEffect(()=>{
-        axios.post("http://localhost:4000/api/mycourse/getcourse", {maLop: maLop})
+        axios.post("http://localhost:4000/api/mycourse/getcourse", {maLop: maLop, userID: acc.email})
         .then(result =>{
             setCourse(result.data.course[0]);
             setExams(result.data.exams);
@@ -85,8 +85,10 @@ function Course() {
                             
                             <p style={{fontFamily:"Verdana"}}>{"Số câu hỏi: " + quiz.numQuestion}</p>
                             <p style={{fontFamily:"Verdana"}}>{"Điểm: " + quiz.score}</p>
-
-                            <button style={{borderRadius:"15px"}} className="setting-button" onClick={(e) => {navigate('/exercise/'+quiz.exerciseID)}}>Vào thi</button>
+                            {acc.role === 'Teacher'?
+                            <button style={{borderRadius:"15px"}} className="setting-button" onClick={(e) => {navigate('/exercise/'+quiz.exerciseID)}}>Xem đề thi</button>:
+                            <button style={{borderRadius:"15px"}} className="setting-button" onClick={(e) => {navigate('/exercise/'+quiz.exerciseID)}}>Vào thi</button>}
+                            
                             <div className="setting">
                                 {(acc.role === "Teacher") ? (
                                     <>
@@ -112,7 +114,9 @@ function Course() {
                                 <p style={{fontFamily:"Verdana"}}>{"Số câu hỏi: " + exam.numQuestion}</p>
                                 <p style={{fontFamily:"Verdana"}}>{"Điểm: " + exam.score}</p>
     
-                                <button style={{borderRadius:"15px"}} className="setting-button" onClick={(e) => {navigate('/exam/'+exam.examID)}}>Vào thi</button>
+                                {acc.role === 'Teacher'?
+                                <button style={{borderRadius:"15px"}} className="setting-button" onClick={(e) => {navigate('/exam/'+exam.examID)}}>Xem đề thi</button>:
+                                <button style={{borderRadius:"15px"}} className="setting-button" onClick={(e) => {navigate('/exam/'+exam.examID)}}>Vào thi</button>}
                                 <div className="setting">
                                     {(acc.role === "Teacher") ? (
                                         <>
