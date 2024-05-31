@@ -3,14 +3,18 @@ import { AccountModel } from "../models/Account.js";
 
 export const createBlog = async (req, res) => {
     try {
-        const {userId, description, picturePath} = req.body;
-        const user = await AccountModel.findById(userId);
+        console.log(req.body.data);
+        const {email, title, description, picturePath} = req.body.data;
+        console.log("Email : ", email);
+
+        const user = await AccountModel.findOne({email});
+        console.log(user.name);
         const newPost = new BlogModel({
             email,
-            name: user.firstName,
-            lastName: user.lastName,
-            description,
+            userName: user.name,
             userAvatar: user.avatar,
+            title,
+            description,
             picturePath,
             likes: {},
             comments: []
@@ -27,8 +31,11 @@ export const createBlog = async (req, res) => {
 // READ
 export const getFeedBlog = async (req, res) => {
     try {
-        const post = await BlogModel.find();
-        res.status(200).json(post);
+        // const post = await BlogModel.find();
+        res.status(200).json({
+            name: "huy",
+            name2: "bruh"
+        });
     } catch (error) {
         res.status(404).json({message: error.message});
     }

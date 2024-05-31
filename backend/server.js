@@ -39,8 +39,8 @@ import MyCourseRoutes from "./routes/MyCourse.js";
 app.use("/api/mycourse", MyCourseRoutes);
 
 ///////////////////////////////////////////////////////////////////
-import BlogRoute from "./routes/Blog.js";
-app.use("api/blog", BlogRoute);
+import BlogRoutes from "./routes/Blog.js";
+app.use("/api/blog", BlogRoutes);
 
 app.get('*', (req, res) => res.send('404 NOT FOUND!!!'));
 
