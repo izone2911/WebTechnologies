@@ -2,7 +2,6 @@ import express from "express";
 import {createBlog, getFeedBlog, getUserBlog, likePosts} from "../controllers/Blog.js";
 
 const router = express.Router();
-
 router.post("/createblog", createBlog);
 router.post("/getfeedblog", getFeedBlog);
 router.post("/:user/posts", getUserBlog);
