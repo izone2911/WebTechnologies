@@ -3,7 +3,6 @@ import { ExerciseAccountModel } from "../models/ExerciseAccount.js"
 
 export const createExercise = async (req,res) => {
     try {
-        console.log(req.body)
         const blog = await ExerciseModel.create(req.body)
         res.json(blog)
     } catch(err) {
@@ -16,13 +15,15 @@ export const createExercise = async (req,res) => {
 export const getExercise = async (req,res) => {
     try {
         const exam = await ExerciseAccountModel.find({exerciseID : req.params.examID,userID : req.body.userID})
-        console.log("exam nè----------------",exam)
         if(exam.length===0) {
             const dataExam = await ExerciseModel.find({exerciseID : req.params.examID})
             let dataExamAccount = {}
             dataExamAccount.exerciseID      = dataExam[0].exerciseID
             dataExamAccount.userID      = req.body.userID
             dataExamAccount.title       = dataExam[0].title
+            dataExamAccount.maHP        = dataExam[0].maHP
+            dataExamAccount.kiHoc       = dataExam[0].kiHoc
+            dataExamAccount.maLop       = dataExam[0].maLop
             dataExamAccount.questions   = dataExam[0].questions
             dataExamAccount.answers     = dataExam[0].answers
             dataExamAccount.userAnswers = {userAnswers : []}
@@ -73,6 +74,5 @@ const joinGetExam = (data) => {
     
 	exams.title = data.title
 	delete data.title
-	console.log(exams);
 	return exams;
 }

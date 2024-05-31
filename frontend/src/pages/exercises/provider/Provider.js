@@ -26,7 +26,6 @@ function Provider({ children }) {
                     headers: {'Content-Type': 'application/json'}
                 });
                 dispatch(setExamData(response.data));
-                console.log("hehe",response.data,response.data.userAnswers)
                 response.data.userAnswers.forEach(element => {
                     console.log("dulieu",element)
                     if(element?.choose===false)
@@ -48,11 +47,16 @@ function Provider({ children }) {
       }, [state]);
     
 
-    useEffect(()=>{ 
-        if(state.isExamFinished) {
-            localStorage.removeItem('storedExamData');
-            navigate('/mycourse')
+      useEffect(()=>{ 
+        const FinishExam = async () => {
+            if(state.isExamFinished) {
+                await axios.post('http://localhost:4000/api/scoreExercise', {answers: state.user.answers, userID: currentUser.email, examID: examID}, 
+                { headers: { 'Content-Type': 'application/json' }})
+                localStorage.removeItem('storedExamData');
+                navigate('/course/'+examID.slice(0,6))
+            }
         }
+        FinishExam()
     }, [navigate, state.isExamFinished])
     
     return(

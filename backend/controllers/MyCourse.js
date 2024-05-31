@@ -33,7 +33,11 @@ export const getCourse = async (req, res) => {
             newItems.kiHoc       = examItem.kiHoc
             newItems.maLop       = examItem.maLop
             newItems.title       = examItem.title
+            newItems.timeLimit   = parseInt(examItem.questions.timeLimit)/60
             newItems.numQuestion = examItem.questions.questions.length
+            newItems.numQues     = -100
+            newItems.numTrue     = -100
+            newItems.score       = -100
             for(let i=0;i<examAccounts.length;i++){
                 let examAccountItem = examAccounts[i]
                 if(examItem.examID === examAccountItem.examID){
@@ -41,10 +45,6 @@ export const getCourse = async (req, res) => {
                         newItems.numTrue = examAccountItem.numTrue
                         newItems.numQues = examAccountItem.numQues
                         newItems.score   = examAccountItem.score
-                    } else {
-                        newItems.numTrue = -100
-                        newItems.numQues = -100
-                        newItems.score   = -100
                     }
                 }
             }
@@ -52,11 +52,39 @@ export const getCourse = async (req, res) => {
             return newItems
         })
 
-        console.log("newExams",newExams)
+        const newExercises = exercises.map((exerciseItem) => {
+            let newItems = {}
+            newItems.exerciseID  = exerciseItem.exerciseID
+            newItems.maHP        = exerciseItem.maHP
+            newItems.kiHoc       = exerciseItem.kiHoc
+            newItems.maLop       = exerciseItem.maLop
+            newItems.title       = exerciseItem.title
+            let x                = new Date(exerciseItem.questions.timeLimit)
+            newItems.timeLimit   = x.getHours() + ":" + x.getMinutes() + (x.getHours()>=12?"PM ":"AM ") + x.getDate() + "/" + (x.getMonth() + 1) + "/" + x.getFullYear();
+            newItems.numQuestion = exerciseItem.questions.questions.length
+            newItems.numQues     = -100
+            newItems.numTrue     = -100
+            newItems.score       = -100
+            for(let i=0;i<exerciseAccounts.length;i++){
+                let exerciseAccountItem = exerciseAccounts[i]
+                if(exerciseItem.exerciseID === exerciseAccountItem.exerciseID){
+                    if(exerciseAccountItem?.numQues){
+                        newItems.numTrue = exerciseAccountItem.numTrue
+                        newItems.numQues = exerciseAccountItem.numQues
+                        newItems.score   = exerciseAccountItem.score
+                    }
+                }
+            }
+
+            return newItems
+        })
+        console.log("BBBBBBBBBBB",newExams)
+        console.log("AAAAAAAAAAA",newExercises)
+
         res.json({
             course: course,
             exams: newExams,
-            exercises: exercises
+            exercises: newExercises
         });
     } catch(err) {
         res.status(500).json({

@@ -62,7 +62,7 @@ function Dashboard() {
                         <img src={course.img} alt="" className="logo"/>
                         <div className="course-info">
                             <h2 style={{fontSize:"25px",fontWeight:"700"}}>{course.nameCourse}</h2>
-                            <p  ><strong>Mã học phần:</strong> {course.maHP}</p>
+                            <p style={{fontFamily:"Verdana"}}><strong>Mã học phần:</strong> {course.maHP}</p>
                             <p style={{fontFamily:"Verdana"}}><strong>Giảng viên:</strong> {course.author}</p>
                             <p style={{fontFamily:"Verdana"}}><strong>Kỳ học:</strong> {course.kiHoc}</p>
 

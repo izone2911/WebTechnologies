@@ -2,7 +2,7 @@ import {Schema as _Schema, model} from "mongoose"
 const Schema = _Schema
 
 const examSchema = new Schema({
-    examID: String,//maLop+kiHoc
+    examID: String,//maLop+maHP+kiHoc++title
     maHP: String,
     kiHoc: String,
     maLop: String,

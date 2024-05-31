@@ -81,13 +81,18 @@ function Course() {
                     <li key={index} className="quiz-item">
                         <img src="https://img.freepik.com/premium-vector/quiz-logo-with-speech-bubble-symbols-concept-questionnaire-show-sing-quiz-button-question-competition-exam-interview-modern-emblem_180786-72.jpg" className="logo"/>
                         <div className="quiz-info">
-                            <p style={{fontFamily:"Verdana",fontSize:"20px"}}>{quiz.title}</p>
                             
+                            <p style={{fontFamily:"Verdana",fontSize:"20px"}}>{quiz.title}</p>
                             <p style={{fontFamily:"Verdana"}}>{"Số câu hỏi: " + quiz.numQuestion}</p>
-                            <p style={{fontFamily:"Verdana"}}>{"Điểm: " + quiz.score}</p>
+                            <p style={{fontFamily:"Verdana"}}>Thời hạn: {quiz.timeLimit}</p>
+
                             {acc.role === 'Teacher'?
                             <button style={{borderRadius:"15px"}} className="setting-button" onClick={(e) => {navigate('/exercise/'+quiz.exerciseID)}}>Xem đề thi</button>:
-                            <button style={{borderRadius:"15px"}} className="setting-button" onClick={(e) => {navigate('/exercise/'+quiz.exerciseID)}}>Vào thi</button>}
+                            null}
+                            {acc.role === 'Student'? quiz.score !== -100 ?
+                            <p style={{fontFamily:"Verdana",fontSize:"16px",fontWeight:"700",color:"red"}}>Điểm: {quiz.score} ({quiz.numTrue}/{quiz.numQues})</p>:
+                            <button style={{borderRadius:"15px"}} className="setting-button" onClick={(e) => {navigate('/exercise/'+quiz.exerciseID)}}>Vào thi</button>:
+                            null}
                             
                             <div className="setting">
                                 {(acc.role === "Teacher") ? (
@@ -112,11 +117,15 @@ function Course() {
                             <div className="exam-info">
                                 <p style={{fontFamily:"Verdana",fontSize:"20px"}}>{exam.title}</p>
                                 <p style={{fontFamily:"Verdana"}}>{"Số câu hỏi: " + exam.numQuestion}</p>
-                                <p style={{fontFamily:"Verdana"}}>{"Điểm: " + exam.score}</p>
-    
+                                <p style={{fontFamily:"Verdana"}}>{"Thời gian: " + exam.timeLimit + " minute"}</p>
+
                                 {acc.role === 'Teacher'?
                                 <button style={{borderRadius:"15px"}} className="setting-button" onClick={(e) => {navigate('/exam/'+exam.examID)}}>Xem đề thi</button>:
-                                <button style={{borderRadius:"15px"}} className="setting-button" onClick={(e) => {navigate('/exam/'+exam.examID)}}>Vào thi</button>}
+                                null}
+                                {acc.role === 'Student'? exam.score !== -100 ?
+                                <p style={{fontFamily:"Verdana",fontSize:"16px",fontWeight:"700",color:"red"}}>Điểm: {exam.score} ({exam.numTrue}/{exam.numQues})</p>:
+                                <button style={{borderRadius:"15px"}} className="setting-button" onClick={(e) => {navigate('/exam/'+exam.examID)}}>Vào thi</button>:
+                                null}
                                 <div className="setting">
                                     {(acc.role === "Teacher") ? (
                                         <>
