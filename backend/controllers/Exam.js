@@ -75,3 +75,19 @@ const joinGetExam = (data) => {
 	console.log(exams);
 	return exams;
 }
+
+export const deleteExam = async (req,res) => {
+    try {
+        const exam = req.body.exam;
+        await ExamModel.deleteOne({ examID:exam.examID });
+        await ExamAccountModel.deleteMany({examID:exam.examID})
+
+        res.json({
+            message: "Delete exam successful"
+        });
+    } catch(err) {
+        res.status(500).json({
+            error: err.message
+        })
+    }
+}

@@ -44,6 +44,7 @@ app.use("/api/blog", BlogRoutes);
 
 app.get('*', (req, res) => res.send('404 NOT FOUND!!!'));
 
+
 app.listen(4000,() => {
     console.log("Server is running on port 4000!!!")
 })

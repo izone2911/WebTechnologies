@@ -73,6 +73,14 @@ const Profile = () => {
         reader.readAsDataURL(file);
       }
     };
+
+    // convert format date time
+    const formatDate = (dateString) => {
+      console.log(dateString + "dumb");
+      if(dateString != null && dateString != undefined)
+        return dateString.split('T')[0];
+      return '2000-01-01';
+    };
   
     return (
       <div className="profile-container">
@@ -130,7 +138,7 @@ const Profile = () => {
               type="date"
               name="birthDay"
               onChange={handleInputChange}
-              defaultValue={tempProfile.birthDay}
+              defaultValue={formatDate(tempProfile.birthDay)}
               className="input"
             />
 

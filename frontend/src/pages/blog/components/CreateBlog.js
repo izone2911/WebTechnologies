@@ -31,28 +31,37 @@ const CreateBlog = ({ onBlogCreated }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Create a New Blog</h3>
-      <input
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Title"
-        required
-      />
-      <textarea
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        placeholder="Description"
-        required
-      />
-      <input
-        type="file"
-        onChange={(e) => setImage(e.target.files[0])}
-        // required
-      />
-      <button type="submit">Create Blog</button>
-    </form>
+    <div >
+      <form onSubmit={handleSubmit} className="create-post-container">
+        <h3>Create a New Blog</h3>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Title"
+          required
+        />
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Description"
+          required
+        />
+        {/* <input
+          type="file"
+          onChange={(e) => setImage(e.target.files[0])}
+          // required
+        /> */}
+        <input
+          type="text"
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
+          placeholder="Image url"
+          // required
+        />
+        <button type="submit">Create Blog</button>
+      </form>
+    </div>
   );
 };
 
