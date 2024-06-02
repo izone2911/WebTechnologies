@@ -19,7 +19,8 @@ const BlogSchema = new Schema({
     },
     likes:{
         type: Map,
-        of: Boolean
+        of: Boolean,
+        default: new Map()
     },
     comments:{
         type: Array,
