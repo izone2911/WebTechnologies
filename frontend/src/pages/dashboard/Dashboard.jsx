@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useContext, useState , useEffect} from "react";
 import axios from "axios";
-
+import SearchIcon from '@mui/icons-material/Search';
 import './dependencies/css/style.css';
 
 function Dashboard() {
@@ -82,7 +82,10 @@ function Dashboard() {
             <div className="controller">
               <div className="search-course">
                 <h2 style={{marginTop:"10px",fontSize:"27px"}}>Tìm trong khóa học của tôi</h2>
-                <input type="text" style={{marginTop:"16px",marginBottom:"16px"}} placeholder="Nhập tên khóa học" onChange={(e)=> setSearchInfor(e.target.value)}/>
+                <div style={{display:"flex",flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
+                    <SearchIcon/>
+                    <input type="text" style={{marginTop:"16px",marginBottom:"16px",border:"none"}} placeholder="Nhập tên khóa học" onChange={(e)=> setSearchInfor(e.target.value)}/>
+                </div>
                 <button style={{borderRadius:"15px"}} onClick={()=> searchCourse(search_info)}>Tìm kiếm</button>
               </div>
             </div>

@@ -13,6 +13,18 @@ export const createExercise = async (req,res) => {
     }
 }
 
+export const updateExercise = async (req,res) => {
+    try {
+        const blog = await ExerciseModel.updateOne({exerciseID: req.body.exerciseID},req.body)
+        await ExerciseAccountModel.deleteMany({exerciseID: req.body.exerciseID})
+        res.json(blog)
+    } catch(err) {
+        res.status(500).json({
+            error: err.message
+        })
+    }
+}
+
 export const getExercise = async (req,res) => {
     try {
         const exam = await ExerciseAccountModel.find({exerciseID : req.params.examID,userID : req.body.userID})
