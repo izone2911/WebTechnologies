@@ -28,3 +28,51 @@
     background-color: lightblue;
     font-weight: 800;
 }
+
+.all-div-ex {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.div-image {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: begin;
+    align-items: center;
+}
+
+.div-image > img {
+    width: 40%;
+    height: 100%;
+}
+.div-image > .quiz-info {
+    width: 60%;
+    height: 100%;
+}
+
+.div-chart {
+    width: 46%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.div-delete {
+    width: 4%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-delete {
+    width: 100%;
+    height: 20%;
+    justify-content: center;
+    align-items: center;
+}

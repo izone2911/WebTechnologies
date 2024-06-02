@@ -13,6 +13,18 @@ export const createExam = async (req,res) => {
     }
 }
 
+export const updateExam = async (req,res) => {
+    try {
+        const blog = await ExamModel.updateOne({examID: req.body.examID},req.body)
+        await ExamAccountModel.deleteMany({examID: req.body.examID})
+        res.json(blog)
+    } catch(err) {
+        res.status(500).json({
+            error: err.message
+        })
+    }
+}
+
 export const getExam = async (req,res) => {
     try {
         const exam = await ExamAccountModel.find({examID : req.params.examID,userID : req.body.userID})
