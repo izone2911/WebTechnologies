@@ -48,7 +48,7 @@ function Form ({ setIsRefreshParent }) {
         { headers: { 'Content-Type': 'application/json' }})
 
         dispatch(setExamFinished());
-        navigate('/mycourses')
+        navigate('/course/'+examID.slice(0,6))
     }
     
     const QuestionBoxs = () => {

@@ -33,7 +33,7 @@ function Form ({ setIsRefreshParent }) {
         console.log(examID)
         for(let i=0; i<length; i++) 
             if(!answers[i] || !answers[i].length)
-                return 'Answer is empty! Do you want to continue ?';
+                return 'Some answer is empty! Do you want to continue ?';
 
         return 'Submit?'
     } 
@@ -48,7 +48,7 @@ function Form ({ setIsRefreshParent }) {
         { headers: { 'Content-Type': 'application/json' }})
 
         dispatch(setExamFinished());
-        navigate('/mycourses')
+        navigate('/course/'+examID.slice(0,6))
     }
     
     const QuestionBoxs = () => {

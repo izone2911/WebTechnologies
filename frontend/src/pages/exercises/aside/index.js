@@ -3,11 +3,14 @@ import { setUserCurrentBox } from '../provider/actions'
 import Timer from "../timer"
 import '../customlibrary/basic.css'
 import styles from './.module.css'
+import { useContext } from "react"
+import { AuthContext } from "../../../context/authContext"
 
 function Aside({ setIsRefreshParent }) {
     const [state, dispatch] = useExam()
     const questions = state.exam.questions
     const answers = state.user.answers
+    const {currentUser} = useContext(AuthContext)
 
     const handleAClick = (e) => {
         let value = e.target.getAttribute('value')
@@ -38,12 +41,14 @@ function Aside({ setIsRefreshParent }) {
     return (
         <aside className={"kimcenter kimcolumn " + styles.aside}>
             <div className={styles.peditable}>
-                <p fontSize={17}>{state.exam.title} </p>
+                <p style={{fontFamily:"Verdana",fontSize:"20px",fontWeight:"900",color:"black"}}>{state.exam.title} </p>
             </div>
             <div className={"kimcenter kimcolumn " + styles.informations}>
+                {currentUser.role === 'Teacher'?
+                null:
                 <div className={styles.timer}>
                     <Timer />
-                </div>
+                </div>}
                 <div className={"kimcenter " + styles.linkBoxs}>
                     {LinkBoxs()}
                 </div>

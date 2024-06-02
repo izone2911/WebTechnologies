@@ -1,9 +1,9 @@
 import {ScoreExerciseModel} from "../models/ScoreExercise.js"
 import {ExerciseModel} from "../models/Exam.js"
+import { ExerciseAccountModel } from "../models/ExerciseAccount.js"
 
 export const addScore = async (req,res) => {
     try {
-        console.log(req.body)
         const exam = await ExerciseModel.find({exerciseID : req.body.examID})
         const answers = exam[0].answers.answers
         
@@ -28,15 +28,22 @@ export const addScore = async (req,res) => {
         let tmp = 10*numTrue/numQues
         let score = parseFloat(tmp.toFixed(2))
         
-        console.log(numTrue,numQues,score)
+        const dataExercise = await ExerciseAccountModel.find({exerciseID: req.body.examID,userID: req.body.userID})
+        let dataExerciseAccount = {}
+        dataExerciseAccount.exerciseID  = dataExercise[0].exerciseID
+        dataExerciseAccount.userID      = req.body.userID
+        dataExerciseAccount.maHP        = dataExercise[0].maHP
+        dataExerciseAccount.kiHoc       = dataExercise[0].kiHoc
+        dataExerciseAccount.maLop       = dataExercise[0].maLop
+        dataExerciseAccount.title       = dataExercise[0].title
+        dataExerciseAccount.questions   = dataExercise[0].questions
+        dataExerciseAccount.answers     = dataExercise[0].answers
+        dataExerciseAccount.userAnswers = dataExercise[0].userAnswers
+        dataExerciseAccount.numTrue     = numTrue
+        dataExerciseAccount.numQues     = numQues
+        dataExerciseAccount.score       = score
 
-        const response = await ScoreExerciseModel.create({
-            userID : req.body.userID,
-            exerciseID : req.body.examID,
-            numTrue: numTrue,
-            numQues: numQues,
-            score  : score
-        })
+        const response = await ExerciseAccountModel.updateOne({exerciseID: req.body.examID,userID: req.body.userID},dataExerciseAccount)
         res.json(response)
     } catch(err) {
         res.status(500).json({

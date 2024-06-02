@@ -8,7 +8,6 @@ function Timer () {
     const [timeNow, ] = useState(() => (Date.now()))
     const initTimer = Math.floor((state.exam.deadline - timeNow) / 1000)
 
-    console.log(state.exam.deadline, timeNow, "hallo", state.exam.deadline,"hallo", initTimer)
     const [date, setDate] = useState(null)
     const [timer, setTimer] = useState(initTimer)
 

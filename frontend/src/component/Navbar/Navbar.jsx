@@ -1,5 +1,5 @@
 import React , { useEffect, useContext, useRef} from 'react'
-import { NavLink, Link, useNavigate} from 'react-router-dom';
+import { NavLink, Link, useNavigate, useParams} from 'react-router-dom';
 
 import $ from 'jquery';
 import './dependencies/bootstrap/js/bootstrap.bundle.min';
@@ -59,7 +59,6 @@ const Navbar = () => {
 
   const coursesRef = useRef(null)  
   useEffect(() => {coursesRef.current.click()}, [currentUser])
-
   return (
     <nav className="navbar navbar-expand-lg navbar-mainbg">
 
@@ -157,14 +156,14 @@ const Navbar = () => {
             </>
             : null}
 
-            {currentUser ? <>
+            {currentUser? <>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/info" exact="true">
                   Profile
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink onClick={handleLogout} className="nav-link" to="/courses" exact="true">
+                <NavLink onClick={handleLogout} className="nav-link" to="/" exact="true">
                   Logout
                 </NavLink>
               </li>

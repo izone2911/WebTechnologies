@@ -9,6 +9,7 @@ export const AuthContexProvider = ({ children }) => {
   );
 
   const login = async (inputs) => {
+    console.log(Date.now() + 12000,new Date(Date.now()))
     const newInputs = {
       ...inputs,
       user:inputs.email,

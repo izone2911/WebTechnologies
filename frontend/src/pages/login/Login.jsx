@@ -82,7 +82,7 @@ const Login = () => {
 					
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" onChange={handleChange}/>
+						<input class="input100" type="delphaitext" name="email" onChange={handleChange}/>
 						<span class="focus-input100"></span>
 						<span class="label-input100">Email</span>
 					</div>

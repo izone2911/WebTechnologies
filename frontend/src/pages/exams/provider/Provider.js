@@ -18,7 +18,6 @@ function Provider({ children }) {
     useEffect(() => {
         const fetchData = async () => {
             const storedExamData = localStorage.getItem('storedExamData');
-            
             try {
                 const response = await axios.post('http://localhost:4000/api/exam/run/'+examID, {
                     "userID" : currentUser.email
@@ -26,9 +25,7 @@ function Provider({ children }) {
                     headers: {'Content-Type': 'application/json'}
                 });
                 dispatch(setExamData(response.data));
-                console.log("hehe",response.data,response.data.userAnswers)
                 response.data.userAnswers.forEach(element => {
-                    console.log("dulieu",element)
                     if(element?.choose===false)
                         dispatch(setExamAnswer(element))
                 });
@@ -49,10 +46,15 @@ function Provider({ children }) {
     
 
     useEffect(()=>{ 
-        if(state.isExamFinished) {
-            localStorage.removeItem('storedExamData');
-            navigate('/mycourse')
+        const FinishExam = async () => {
+            if(state.isExamFinished) {
+                await axios.post('http://localhost:4000/api/scoreExam', {answers: state.user.answers, userID: currentUser.email, examID: examID}, 
+                { headers: { 'Content-Type': 'application/json' }})
+                localStorage.removeItem('storedExamData');
+                navigate('/course/'+examID.slice(0,6))
+            }
         }
+        FinishExam()
     }, [navigate, state.isExamFinished])
     
     return(

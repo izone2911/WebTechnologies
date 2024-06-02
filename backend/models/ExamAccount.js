@@ -2,7 +2,7 @@ import {Schema as _Schema, model} from "mongoose"
 const Schema = _Schema
 
 const examAccountSchema = new Schema({
-    examID: String,//maLop+kiHoc
+    examID: String,//maLop+maHP+kiHoc++title
     userID: String,
     maHP: String,
     kiHoc: String,
@@ -11,6 +11,9 @@ const examAccountSchema = new Schema({
     userAnswers: Object,
     questions: Object,
     answers: Object,
+    numTrue: Number,
+    numQues: Number,
+    score: Number,
     createAt: {
         type: Date,
         default: Date.now,

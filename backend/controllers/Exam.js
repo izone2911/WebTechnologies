@@ -13,6 +13,18 @@ export const createExam = async (req,res) => {
     }
 }
 
+export const updateExam = async (req,res) => {
+    try {
+        const blog = await ExamModel.updateOne({examID: req.body.examID},req.body)
+        await ExamAccountModel.deleteMany({examID: req.body.examID})
+        res.json(blog)
+    } catch(err) {
+        res.status(500).json({
+            error: err.message
+        })
+    }
+}
+
 export const getExam = async (req,res) => {
     try {
         const exam = await ExamAccountModel.find({examID : req.params.examID,userID : req.body.userID})
@@ -21,6 +33,9 @@ export const getExam = async (req,res) => {
             let dataExamAccount = {}
             dataExamAccount.examID      = dataExam[0].examID
             dataExamAccount.userID      = req.body.userID
+            dataExamAccount.maHP        = dataExam[0].maHP
+            dataExamAccount.kiHoc       = dataExam[0].kiHoc
+            dataExamAccount.maLop       = dataExam[0].maLop
             dataExamAccount.title       = dataExam[0].title
             dataExamAccount.questions   = dataExam[0].questions
             dataExamAccount.answers     = dataExam[0].answers
