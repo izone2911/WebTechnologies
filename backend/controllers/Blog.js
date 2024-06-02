@@ -10,8 +10,6 @@ export const createBlog = async (req, res) => {
         const user = await AccountModel.findOne({email});
         console.log(user.name);
 
-        const newMap = new Map();
-        newMap.set('a', true);
         const newPost = new BlogModel({
             email,
             userName: user.name,
@@ -19,7 +17,7 @@ export const createBlog = async (req, res) => {
             title,
             description,
             picturePath,
-            likes: newMap,
+            likes: [],
             comments: []
         });
         await newPost.save();
@@ -62,34 +60,58 @@ export const likePosts = async (req, res) => {
         const blog = await BlogModel.findById(id);
         
         // const myMap = new Map(blog.likes);
-        var isLiked = false;
         if(blog != null){
-            isLiked = blog.likes.get(emailCurrentUser);
+            var isLiked = false;
+            const index = blog.likes.indexOf(emailCurrentUser);
+            if(index != -1) isLiked = true;
             console.log(blog.likes);
             console.log(isLiked);
-            // console.log("ok" + blog);
+            console.log("ok" + blog);
 
             if (isLiked) {
                 console.log("User already liked the post, removing like.");
-                blog.likes.delete(emailCurrentUser);
-                // myMap.delete(emailCurrentUser);
+                blog.likes.splice(index, 1);
             } 
             else {
                 console.log("User has not liked the post, adding like.");
-                blog.likes.set(emailCurrentUser, true);
-                // myMap.set(emailCurrentUser, true);
+                blog.likes.push(emailCurrentUser);
             }
+            await blog.save();
+            console.log("Done");
+            res.status(200).json({isLiked, numberLike: blog.likes.length});
         }       
-        
-        
 
-        // const updatedBlog = await BlogModel.updateOne(
-        //     {id},
-        //     {likes: myMap}
-        // );
-        await blog.save();
-        console.log("Done");
-        res.status(200).json(updatedBlog);
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+
+export const getNumberLiked = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const {emailCurrentUser} = req.body;
+        console.log("id : " + id);
+        console.log("email : " + emailCurrentUser);
+
+         if(id == undefined){
+            console.log(id);
+            res.status(201).json({isLiked: false, numberLike: 0});
+            return;
+         }
+
+        const blog = await BlogModel.findById(id);
+        
+        // const myMap = new Map(blog.likes);
+        if(blog != null){
+            var isLiked = false;
+            const index = blog.likes.indexOf(emailCurrentUser);
+            if(index != -1) isLiked = true;
+            console.log(blog.likes);
+            console.log(isLiked);
+            console.log("Done");
+            res.status(200).json({isLiked, numberLike: blog.likes.length});
+        }       
+
     } catch (error) {
         res.status(404).json({message: error.message});
     }
@@ -101,6 +123,12 @@ export const getCommentPosts = async (req, res) => {
         const {emailCurrentUser} = req.body;
         console.log("id : " + id);
         console.log("email : " + emailCurrentUser);
+
+        if(id == undefined){
+            console.log(id);
+            res.status(201).json([]);
+            return;
+        }
 
         const blog = await BlogModel.findById(id);
         console.log(blog.comments);
