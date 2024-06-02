@@ -33,8 +33,8 @@ function HomePage(){
     return (
     <div className="container3">
         <h1>Blog Forum</h1>
-        <BlogList blogs={blogs} />
         <CreateBlog onBlogCreated={handleBlogCreated} /> 
+        <BlogList blogs={blogs} />
     </div>
     );
 };

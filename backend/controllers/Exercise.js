@@ -1,4 +1,5 @@
 import {ExerciseModel} from "../models/Exam.js"
+import { ExamAccountModel } from "../models/ExamAccount.js"
 import { ExerciseAccountModel } from "../models/ExerciseAccount.js"
 
 export const createExercise = async (req,res) => {
@@ -75,4 +76,20 @@ const joinGetExam = (data) => {
 	exams.title = data.title
 	delete data.title
 	return exams;
+}
+
+export const deleteExcercise = async (req,res) => {
+    try {
+        const excercise = req.body.excercise;
+        await ExerciseModel.deleteOne({ exerciseID: excercise.exerciseID });
+        await ExamAccountModel.deleteMany({exerciseID: excercise.exerciseID})
+
+        res.json({
+            message: "Delete exam successful"
+        });
+    } catch(err) {
+        res.status(500).json({
+            error: err.message
+        })
+    }
 }

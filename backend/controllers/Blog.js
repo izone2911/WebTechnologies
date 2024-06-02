@@ -31,11 +31,8 @@ export const createBlog = async (req, res) => {
 // READ
 export const getFeedBlog = async (req, res) => {
     try {
-        // const post = await BlogModel.find();
-        res.status(200).json({
-            name: "huy",
-            name2: "bruh"
-        });
+        const post = await BlogModel.find();
+        res.status(200).json(post);
     } catch (error) {
         res.status(404).json({message: error.message});
     }
@@ -55,24 +52,47 @@ export const getUserBlog = async (req, res) => {
 export const likePosts = async (req, res) => {
     try {
         const {id} = req.params;
-        const {email} = req.body;
-        const post = await BlogModel.findById(id);
-        const isLiked = post.likes.get(userId);
+        const {emailCurrentUser} = req.body;
+        console.log("id : " + id);
+        console.log("email : " + emailCurrentUser);
 
-        if(isLiked){
-            post.likes.delete(email);
-        }
-        else{
-            post.likes.set(email, true);
+        const blog = await BlogModel.findById(id);
+        const myMap = new Map(blog.likes);
+        const isLiked = blog.likes.get(emailCurrentUser);
+        console.log("ok" + blog);
+
+        if (isLiked) {
+            console.log("User already liked the post, removing like.");
+            myMap.delete(emailCurrentUser);
+        } 
+        else {
+            console.log("User has not liked the post, adding like.");
+            // blog.likes.set(emailCurrentUser, true);
+            myMap.set(emailCurrentUser, true);
         }
 
-        const updatedPost = await BlogModel.findByIdAndUpdate(
-            id,
-            {likes: post.likes},
-            {new: true}
+        const updatedBlog = await BlogModel.updateOne(
+            {id},
+            {likes: likesObj}
         );
+        console.log("Done");
+        res.status(200).json(updatedBlog);
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
 
-        res.status(200).json(updatedPost);
+export const commentPosts = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const {emailCurrentUser} = req.body;
+        console.log("id : " + id);
+        console.log("email : " + emailCurrentUser);
+
+        const blog = await BlogModel.findById(id);
+        
+
+        res.status(200).json({message: "hello"});
     } catch (error) {
         res.status(404).json({message: error.message});
     }

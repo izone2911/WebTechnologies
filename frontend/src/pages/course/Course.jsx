@@ -69,6 +69,23 @@ function Course() {
         .catch(err => console.log(err));
     }, []);
 
+    // delete exam and excercise
+    const [indexDelete, setIndexDelete] = useState();
+
+    const deleteExamHandle = async(index)=>{
+        setIndexDelete(index);
+        const exam = exams[index];
+        exams.splice(index, 1);
+        const res = await axios.post("http://localhost:4000/api/exam/deleteexam", {exam: exam});
+    }
+
+    const deleteExerciseHandle = async(index)=>{
+        setIndexDelete(index);
+        const excercise = exercises[index];
+        excercise.splice(index, 1);
+        const res = await axios.post("http://localhost:4000/api/exercise/deleteexercise", {excercise: excercise});
+    }
+
     const ExamList = () => {
         return(
             <div style={{marginLeft:"50px",marginRight:"50px"}} className="container2">
@@ -100,7 +117,7 @@ function Course() {
                                     <button style={{borderRadius:"15px"}} className="setting-button"><i class="fas fa-cog"></i></button>
                                     <div className="dropDownSetting">
                                         <a style={{borderRadius:"15px 15px 0px 0px"}}>Edit</a>
-                                        <a style={{borderRadius:"0px 0px 15px 15px"}}>Delete</a>
+                                        <a onClick={()=>deleteExamHandle(index)} style={{borderRadius:"0px 0px 15px 15px"}}>Delete</a>
                                     </div>
                                     </>
                                 ) : (null)}
