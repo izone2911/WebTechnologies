@@ -149,7 +149,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link"  to="/homepage" exact="true">
+                <NavLink className="nav-link"  to="/blog/homepage" exact="true">
                   Blog
                 </NavLink>
               </li>
@@ -160,11 +160,6 @@ const Navbar = () => {
               <li className="nav-item">
                 <NavLink className="nav-link" to="/info" exact="true">
                   Profile
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink onClick={handleLogout} className="nav-link" to="/" exact="true">
-                  Logout
                 </NavLink>
               </li>
             </> : <>

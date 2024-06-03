@@ -1,0 +1,69 @@
+.container-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.div-image {
+    min-height: 250px;
+    width: 80%;
+    margin-top: 30px;
+    overflow: hidden;
+    border-radius: 15px;
+}
+.div-author {
+    margin-top: 20px;
+    width: 80%;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+}
+.div-avatar {
+    height: 100%;
+    width: 8%;
+    border-radius: 100%;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+.div-avatar > img {
+    object-fit: cover;
+}
+.name-author {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.email-author {
+    font-size: 20px;
+    font-weight: 700;
+}
+.time-create {
+    font-size: 16px;
+    font-weight: 400;
+}
+.div-content {
+    margin-top: 20px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.div-title {
+    font-size: 45px;
+    font-weight: 800;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow: hidden;
+}
+.div-description {
+    width: 78%;
+    font-size: 20px;
+    font-weight: 400;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow: hidden;
+}
+.EditIcon {
+    margin-right: 30px;
+}

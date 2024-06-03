@@ -1,13 +1,9 @@
 import React, { useMemo } from "react";
-import axios from "axios";
 import { motion } from "framer-motion";
 import * as formik from 'formik';
-import * as yup from 'yup';
 import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { IoCloseCircleOutline } from "react-icons/io5";
-import moment from 'moment'
 import './ModalInfo.css'
 
 

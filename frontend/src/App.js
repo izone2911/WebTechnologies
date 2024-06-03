@@ -1,7 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, useParams } 
+import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, useParams }
   from "react-router-dom";
 
-  import { Login, Register, MyCourse, Course, Dashboard, Exam, Exercise, Profile, HomePage, BlogPage, AccountManage} from "./pages";
+import { Login, Register, MyCourse, Course, Dashboard, Exam, Exercise, Profile, AccountManage } from "./pages";
+import HomeBlog from "./pages/blog/HomeBlog.js";
+import SingleBlog from "./pages/blog/SingleBlog.js";
 import Navbar from "./component/Navbar/Navbar.jsx";
 import { useContext } from "react";
 import { AuthContext } from "./context/authContext.js";
@@ -54,36 +56,36 @@ const PrivateRouteGuess = ({ element: Element, ...rest }) => {
   const { currentUser } = useContext(AuthContext);
   const hasAccess = currentUser;
 
-  return hasAccess ? <Navigate to="/" />:<Element {...rest} /> ;
+  return hasAccess ? <Navigate to="/" /> : <Element {...rest} />;
 };
 
 function App() {
   return (
     <Router>
-      <Layout/>
+      <Layout />
       <Routes>
-        <Route path="/" element={<Navigate replace to="/dashboard"/>} />
-        <Route path="/login"  exact 
-              element={<PrivateRouteGuess element={Login} />} />
-        <Route path="/dashboard"  exact element={<Dashboard />}  />
-        <Route path="/register" exact 
-              element={<PrivateRouteGuess element={Register} />} />
-        <Route path="/mycourse" exact 
-              element={<PrivateRouteNotAdmin element={MyCourse} />} />
-        <Route path="/course/:id" exact 
-              element={<PrivateRouteNotAdmin element={Course} />} />
-        <Route path="/exam/:examID" exact 
-              element={<PrivateRouteNotAdmin element={Exam} />} />
-        <Route path="/exercise/:examID" exact 
-              element={<PrivateRouteNotAdmin element={Exercise} />} />
-        <Route path="/info" exact 
-              element={<PrivateRouteUser element={Profile} />} />
-        <Route path="/homepage" exact element={<HomePage />} />
-        <Route path="/blog/:id" exact element={<BlogPage />} />
+        <Route path="/" element={<Navigate replace to="/dashboard" />} />
+        <Route path="/login" exact
+          element={<PrivateRouteGuess element={Login} />} />
+        <Route path="/dashboard" exact element={<Dashboard />} />
+        <Route path="/register" exact
+          element={<PrivateRouteGuess element={Register} />} />
+        <Route path="/mycourse" exact
+          element={<PrivateRouteNotAdmin element={MyCourse} />} />
+        <Route path="/course/:id" exact
+          element={<PrivateRouteNotAdmin element={Course} />} />
+        <Route path="/exam/:examID" exact
+          element={<PrivateRouteNotAdmin element={Exam} />} />
+        <Route path="/exercise/:examID" exact
+          element={<PrivateRouteNotAdmin element={Exercise} />} />
+        <Route path="/info" exact
+          element={<PrivateRouteUser element={Profile} />} />
+        <Route path="/blog/homepage" element={<HomeBlog />} />
+        <Route path="/blog/post/:id" element={<SingleBlog />} />
         <Route path="/manage" exact element={<AccountManage />} />
       </Routes>
     </Router>
-    
+
   );
 }
 
