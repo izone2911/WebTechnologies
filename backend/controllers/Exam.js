@@ -93,9 +93,9 @@ const joinGetExam = (data) => {
 
 export const deleteExam = async (req,res) => {
     try {
-        const exam = req.body.exam;
-        await ExamModel.deleteOne({ examID:exam.examID });
-        await ExamAccountModel.deleteMany({examID:exam.examID})
+        const examID = req.body.examID;
+        await ExamModel.deleteOne({ examID:examID });
+        await ExamAccountModel.deleteMany({examID:examID})
 
         res.json({
             message: "Delete exam successful"

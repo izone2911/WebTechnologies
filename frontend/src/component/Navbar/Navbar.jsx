@@ -138,8 +138,8 @@ const Navbar = () => {
             {currentUser?
               currentUser.roleID === 1 ? 
               <li className="nav-item">
-                <NavLink className="nav-link" to="/accman" exact="true">
-                  AccMan
+                <NavLink className="nav-link" to="/manage" exact="true">
+                  Manage
                 </NavLink>
               </li> 
             :<>

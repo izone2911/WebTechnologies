@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, useParams } 
   from "react-router-dom";
 
-  import { Login, Register, MyCourse, Course, Dashboard, Exam, Exercise, Profile, HomePage, BlogPage} from "./pages";
+  import { Login, Register, MyCourse, Course, Dashboard, Exam, Exercise, Profile, HomePage, BlogPage, AccountManage} from "./pages";
 import Navbar from "./component/Navbar/Navbar.jsx";
 import { useContext } from "react";
 import { AuthContext } from "./context/authContext.js";
@@ -80,6 +80,7 @@ function App() {
               element={<PrivateRouteUser element={Profile} />} />
         <Route path="/homepage" exact element={<HomePage />} />
         <Route path="/blog/:id" exact element={<BlogPage />} />
+        <Route path="/manage" exact element={<AccountManage />} />
       </Routes>
     </Router>
     

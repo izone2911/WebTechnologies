@@ -5,6 +5,7 @@ const accountSchema = new Schema({
     email: String,
     password: String,
     name: String,
+    role: String,
     avatar: {
         type: String,
         default: "https://w7.pngwing.com/pngs/205/731/png-transparent-default-avatar-thumbnail.png"

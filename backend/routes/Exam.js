@@ -6,5 +6,5 @@ router.post("/run/:examID",getExam)
 router.post("/create",createExam)
 router.post("/update/:examID",updateExamAccount)
 router.post("/updateExam",updateExam)
-router.post("/deleteexam", deleteExam);
+router.post("/delete", deleteExam);
 export default router

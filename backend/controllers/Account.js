@@ -11,9 +11,31 @@ export const getAccount = async (req,res) => {
     }
 }
 
+export const getAllAccount = async (req,res) => {
+    try {
+        const acc = await AccountModel.find({})
+        res.json(acc)
+    } catch(err) {
+        res.status(500).json({
+            error: err.message
+        })
+    }
+}
+
+
+export const deleteAccount = async (req,res) => {
+    try {
+        const acc = await AccountModel.deleteMany({email: {$in : req.body}})
+        res.json(acc)
+    } catch(err) {
+        res.status(500).json({
+            error: err.message
+        })
+    }
+}
+
 export const createAccount = async (req,res) => {
     try {
-        console.log(req.body)
         const blog = await AccountModel.create(req.body)
         res.json(blog)
     } catch(err) {
@@ -25,7 +47,6 @@ export const createAccount = async (req,res) => {
 
 export const updateAccount = async (req,res) => {
     try {
-        console.log(req.body);
         const blog = req.body.acc;
         const {email, password, name, gender, birthDay, avatar, phone} = blog;
         const updateacc = await AccountModel.updateOne({email}, {$set: {password, name, gender, birthDay, avatar, phone}});
@@ -39,6 +60,21 @@ export const updateAccount = async (req,res) => {
         })
     }
 }
+
+export const updatePassword = async (req,res) => {
+    try {
+        const updateacc = await AccountModel.updateOne({email:req.body.email}, {$set: {password:req.body.password}});
+        res.json({
+            message: "Update password successfull",
+            // res: updateacc
+        })
+    } catch(err) {
+        res.status(500).json({
+            error: err.message
+        })
+    }
+}
+
 
 export const logOut = (req, res) => {
     res
