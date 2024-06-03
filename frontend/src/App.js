@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, useParams } 
   from "react-router-dom";
 
-import { Login, Register, MyCourse, Course, Dashboard, Exam, Exercise, Profile, HomePage, BlogPage} from "./pages";
+  import { Login, Register, MyCourse, Course, Dashboard, Exam, Exercise, Profile, HomePage, BlogPage} from "./pages";
 import Navbar from "./component/Navbar/Navbar.jsx";
 import { useContext } from "react";
 import { AuthContext } from "./context/authContext.js";

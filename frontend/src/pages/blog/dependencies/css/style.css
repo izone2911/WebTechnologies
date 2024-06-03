@@ -95,10 +95,13 @@ button:hover {
 
 .comment {
   padding: 10px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  width: 80%;
+  background-color: #EDEDED;
+  /* background-color: #808080; */
+  border: 1px solid #eababa;
+  border-radius: 15px;
   margin-top: 10px;
+  margin-left: auto;
 }
 
 .like-button {

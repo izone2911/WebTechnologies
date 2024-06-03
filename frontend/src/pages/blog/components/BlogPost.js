@@ -6,7 +6,7 @@ import { AuthContext } from "../../../context/authContext.js";
 
 const BlogPost = ({ blog }) => {
   const { currentUser} = useContext(AuthContext);
-  const data = {blogId: blog._id, emailCurrentUser: currentUser.email}
+  const data = {blogId: blog._id, emailCurrentUser: currentUser.email, avatarCurrentUser: currentUser.avatar}
 
   return (
     <div className="blog-post">
@@ -21,7 +21,7 @@ const BlogPost = ({ blog }) => {
         <LikeButton data={data} />
       </div>
       <div className="comment-section">
-        <Comment blogId={blog._id} />
+        <Comment data={data} />
       </div>
     </div>
   );

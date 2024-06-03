@@ -25,7 +25,6 @@ const Profile = () => {
 
     const [warningMessage, setWarningMessage] = useState();
 
-  
     const handleInputChange = (e) => {
       const { name, value } = e.target;
       setTempProfile({ ...tempProfile, [name]: value });
@@ -83,98 +82,109 @@ const Profile = () => {
     };
   
     return (
-      <div className="profile-container">
-        <img src={tempProfile.avatar} alt="Avatar" className="profile-image" 
-        onClick={() => document.getElementById('avatarInput').click()
-        
-        }/>
-        <input type="file"
-          id="avatarInput"
-          style={{display: 'none'}}
-          onChange={handleAvatarChange}
-        />
-        
+    <div style={{display: "flex", width: "100%", padding: "20px"}}>
+      <div className="profile-container" style={{height:"460px", width: "500px", display: "flex", flexDirection:"column", alignItems: "center"}}>
+        <img src={tempProfile.avatar} alt="Avatar" className="profile-image"/>
+        <div style={{marginBottom: "30px"}}>{tempProfile.name}</div>
+        <button onClick={handleLogOut} className="btn btn-danger" style={{margin:"30px 0", width:"150px", height:"50px", fontSize:"20px"}}>Log out</button>
+      </div>
+
+
+      <div className="profile-container" style={{width: "99%", justifyContent: "space-around"}}>
         {editMode ? (
-          <div className="infor">
-            <label htmlFor="name">Họ và tên</label>
-            <input
-              type="text"
-              name="name"
-              defaultValue={tempProfile.name}
-              onChange={handleInputChange}
-              className="input"
-              placeholder="Họ và tên"
-            />
+          <div className="infor display">
+            <div style={{display: 'flex', alignItems: 'center', width:"50%", justifyContent: "space-between", padding:"5px 10px"}}> 
+              <label htmlFor="name">Họ và tên</label>
+              <input
+                type="text"
+                name="name"
+                defaultValue={tempProfile.name}
+                onChange={handleInputChange}
+                className="input"
+                placeholder="Họ và tên"
+              />
+            </div>
 
-            <label htmlFor="role">Vai trò</label>
-            <input
-              type="text"
-              name="role"
-              defaultValue={tempProfile.role}
-              className="input"
-              readOnly
-            />
+            <div style={{display: 'flex', alignItems: 'center', width:"50%", justifyContent: "space-between", padding:"5px 10px"}}> 
+              <label htmlFor="role">Vai trò</label>
+              <input
+                type="text"
+                name="role"
+                defaultValue={tempProfile.role}
+                className="input"
+                readOnly
+              />
+            </div>
 
-            <label htmlFor="email">Email</label> 
-            <input
-              type="email"
-              name="email"
-              defaultValue={tempProfile.email}
-              className="input"
-              readOnly
-            />
+            <div style={{display: 'flex', alignItems: 'center', width:"50%", justifyContent: "space-between", padding:"5px 10px"}}> 
+              <label htmlFor="email">Email</label> 
+              <input
+                type="email"
+                name="email"
+                defaultValue={tempProfile.email}
+                className="input"
+                readOnly
+              />
+            </div>
 
-            <label htmlFor="phone">SĐT</label>
-            <input
-              type="tel"
-              name="phone"
-              onChange={handleInputChange}
-              defaultValue={tempProfile.phone}
-              className="input"
-            />
+            <div style={{display: 'flex', alignItems: 'center', width:"50%", justifyContent: "space-between", padding:"5px 10px"}}> 
+              <label htmlFor="phone">SĐT</label>
+              <input
+                type="tel"
+                name="phone"
+                onChange={handleInputChange}
+                defaultValue={tempProfile.phone}
+                className="input"
+              />
+            </div>
 
-            <label htmlFor="birthDay">Ngày sinh</label>
-            <input
-              type="date"
-              name="birthDay"
-              onChange={handleInputChange}
-              defaultValue={formatDate(tempProfile.birthDay)}
-              className="input"
-            />
+            <div style={{display: 'flex', alignItems: 'center', width:"50%", justifyContent: "space-between", padding:"5px 10px"}}> 
+              <label htmlFor="birthDay">Ngày sinh</label>
+              <input
+                type="date"
+                name="birthDay"
+                onChange={handleInputChange}
+                defaultValue={formatDate(tempProfile.birthDay)}
+                className="input"
+              />
+            </div>
 
-          <label htmlFor="gender">Giới tính</label>
-          <select
-            name="gender"
-            value={tempProfile.gender}
-            onChange={handleInputChange}
-            className="input"
-          >
-            <option value="Nam">Nam</option>
-            <option value="Nữ">Nữ</option>
-          </select>
+            <div style={{display: 'flex', alignItems: 'center', width:"50%", justifyContent: "space-between", padding:"5px 10px"}}> 
+              <label htmlFor="gender">Giới tính</label>
+              <select
+                name="gender"
+                value={tempProfile.gender}
+                onChange={handleInputChange}
+                className="input"
+              >
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+              </select>
+            </div>
 
-            <label htmlFor="password">Mật khẩu</label>
-            {!editPassword ? (
-                <button className="setting-button" onClick={enableEditPassword}>Sửa mật khẩu</button>
-            ) : (
-                <div className="password-container">
-                    <input
-                    type={showPassword ? 'text' : 'password'}
-                    name="password"
-                    defaultValue={tempProfile.password}
-                    onChange={handleInputChange}
-                    className="input password-input"
-                    placeholder="Mật khẩu"
-                    />
+            <div style={{display: 'flex', alignItems: 'center', width:"50%", justifyContent: "space-between", padding:"5px 10px"}}> 
+              <label htmlFor="password">Mật khẩu</label>
 
-                    <span
-                    className="password-toggle"
-                    onClick={() => setShowPassword(!showPassword)}
-                    >
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
-                    </span>
+              <div className="password-container">
+                  <input
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  defaultValue={tempProfile.password}
+                  onChange={handleInputChange}
+                  className="input password-input"
+                  placeholder="Mật khẩu"
+                  />
 
-                    <label htmlFor="retype-password">Nhập lại mật khẩu</label>
+                  <span
+                  className="password-toggle"
+                  onClick={() => setShowPassword(!showPassword)}
+                  >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </span>
+              </div>
+            </div>
+            <div style={{display: 'flex', alignItems: 'center', width:"50%", justifyContent: "space-between", padding:"5px 10px"}}> 
+                    <label htmlFor="retype-password">Xác thực</label>
                     <input
                     type={showRetypePassword ? 'text' : 'password'}
                     name="retype_password"
@@ -191,12 +201,10 @@ const Profile = () => {
                     {showRetypePassword ? <FaEyeSlash /> : <FaEye />}
                     </span>
                 </div>
-            )}
 
-            <div className="choice-button">
+            <div className="choice-button" style={{display:"flex", width:"100%", }}>
               <button onClick={handleSave} className="btn btn-success">Save</button>
               <button onClick={()=>setEditMode(false)} className="btn btn-danger">Cancel</button>
-              <button onClick={handleLogOut} className="btn btn-danger">Log out</button>
             </div>
 
             {warning ? (<p style={{color: "red"}}>{warningMessage}</p>) : (null)}
@@ -209,7 +217,7 @@ const Profile = () => {
           </>
         )}
       </div>
-    );
+    </div>);
   };
   
   export default Profile;
