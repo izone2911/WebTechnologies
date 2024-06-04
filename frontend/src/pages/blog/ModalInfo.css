@@ -53,11 +53,13 @@
   /* default */
   .modal {
     min-height: 600px;
+    width: 80% !important;
+    height: 80% !important;
     border-radius: 20px;
-    position: relative;
+    position: relative !important;
     background-color: white;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    display: flex;
+    display: flex !important;
     overflow: scroll;
   }
   
